@@ -1,0 +1,70 @@
+{
+  "lfmob.creeper.death": {
+    "category": "hostile",
+    "sounds": [
+      "lfmob/creeper/death"
+    ]
+  },
+  "lfmob.creeper.say": {
+    "category": "hostile",
+    "sounds": [
+      "lfmob/creeper/say1",
+      "lfmob/creeper/say2",
+      "lfmob/creeper/say3",
+      "lfmob/creeper/say4"
+    ]
+  },
+  "lfcreeper.primed": {
+    "category": "hostile",
+    "sounds": [
+      "lfrandom/fuse"
+    ]
+  },
+  "lfmob.endermen.death": {
+    "category": "hostile",
+    "sounds": [
+      "lfmob/endermen/death"
+    ]
+  },
+  "lfmob.endermen.hit": {
+    "category": "hostile",
+    "sounds": [
+      "lfmob/endermen/hit1",
+      "lfmob/endermen/hit2",
+      "lfmob/endermen/hit3",
+      "lfmob/endermen/hit4"
+    ]
+  },
+  "lfmob.endermen.idle": {
+    "category": "hostile",
+    "sounds": [
+      "lfmob/endermen/idle1",
+      "lfmob/endermen/idle2",
+      "lfmob/endermen/idle3",
+      "lfmob/endermen/idle4",
+      "lfmob/endermen/idle5"
+    ]
+  },
+  "lfmob.endermen.portal": {
+    "category": "hostile",
+    "sounds": [
+      "lfmob/endermen/portal",
+      "lfmob/endermen/portal2"
+    ]
+  },
+  "lfmob.endermen.scream": {
+    "category": "hostile",
+    "sounds": [
+      "lfmob/endermen/scream1",
+      "lfmob/endermen/scream2",
+      "lfmob/endermen/scream3",
+      "lfmob/endermen/scream4"
+    ]
+  },
+  "lfmob.endermen.stare": {
+    "category": "hostile",
+    "sounds": [
+      "lfmob/endermen/stare"
+    ]
+  }
+}

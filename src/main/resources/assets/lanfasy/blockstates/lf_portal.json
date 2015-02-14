@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "normal": { "model": "lanfasy:lf_portal" },
+        "axis=z": { "model": "lanfasy:lf_portal_ew" },
+        "axis=x": { "model": "lanfasy:lf_portal_ns" }
+    }
+}
