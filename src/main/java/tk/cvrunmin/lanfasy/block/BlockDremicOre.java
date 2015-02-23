@@ -19,7 +19,7 @@ public class BlockDremicOre extends LFBlock{
 		this.setUnlocalizedName("dremicOre");
 		this.setRegisteredName("dremic_ore");
 		this.setHardness(3.0F);
-		this.setResistance(5.0F);
+		this.setResistance(500.0F);
 		this.setStepSound(soundTypePiston);
         this.setCreativeTab(CreativeTabs.tabBlock);
 	}

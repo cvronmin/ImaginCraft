@@ -212,26 +212,6 @@ public class BlockLFPortal extends LFBlockBreakable
 	                   thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, 0, new TeleporterLF(thePlayer.mcServer.worldServerForDimension(0)));
 	           }
         }
-        else if (entityIn.ridingEntity == null && entityIn.riddenByEntity == null && !(entityIn instanceof EntityPlayerMP))
-        {
-            MinecraftServer minecraftserver = MinecraftServer.getServer();
-            int j = entityIn.dimension;
-            WorldServer worldserver = minecraftserver.worldServerForDimension(j);
-            WorldServer worldserver1 = minecraftserver.worldServerForDimension(1010);
-	           if (entityIn.timeUntilPortal > 0)
-	           {
-	                   entityIn.timeUntilPortal = 10;
-	           }
-	           else if (entityIn.dimension != 1010)
-	           {
-	                   entityIn.timeUntilPortal = 10;
-	                   minecraftserver.getConfigurationManager().transferEntityToWorld(entityIn, 1010, worldserver, worldserver1, new TeleporterLF(minecraftserver.worldServerForDimension(1010)));
-	           }
-	           else {
-	                   entityIn.timeUntilPortal = 10;
-	                   minecraftserver.getConfigurationManager().transferEntityToWorld(entityIn, 0, worldserver, worldserver1, new TeleporterLF(minecraftserver.worldServerForDimension(0)));
-	           }
-        }
     }
 
     public IBlockState getStateFromMeta(int meta)
@@ -431,7 +411,7 @@ public class BlockLFPortal extends LFBlockBreakable
 
             protected boolean func_150857_a(Block p_150857_1_)
             {
-                return p_150857_1_.getMaterial() == Material.air || p_150857_1_ == Blocks.fire || p_150857_1_ == LFBlocks.lfportal;
+                return p_150857_1_.getMaterial() == Material.air || p_150857_1_ == LFBlocks.lffire || p_150857_1_ == LFBlocks.lfportal;
             }
 
             public boolean func_150860_b()

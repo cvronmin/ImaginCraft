@@ -4,10 +4,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 import tk.cvrunmin.lanfasy.entity.LFEntityGhast;
 import tk.cvrunmin.lanfasy.entity.LFEntityPigZombie;
 
-public class MLBiomeGenHell extends LFBiomeBase {
+public class LFBiomeGenHell extends LFBiomeBase {
 
 	@SuppressWarnings("unchecked")
-	public MLBiomeGenHell(int par1) {
+	public LFBiomeGenHell(int par1) {
 		super(par1);
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();

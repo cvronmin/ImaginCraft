@@ -8,14 +8,14 @@ import tk.cvrunmin.lanfasy.init.LFBlocks;
 public class LFBiomeBase extends BiomeGenBase{
 	private final static LFBiomeBase INSTANCE = new LFBiomeBase();
 	public static int biomeID;
-	public static final BiomeGenBase MLocean = new MLBiomeGenOcean(128).setColor(112)
-			.setBiomeName("Onaec");
-	public static final BiomeGenBase MLplains = new MLBiomeGenPlain(129).setColor(9286496)
-			.setBiomeName("Psalin");
-	public static final BiomeGenBase MLextremeHills = new MLBiomeGenHills(130, false)
-	.setColor(6316128).setBiomeName("Trexeme Illsh");
-	public static final BiomeGenBase MLhell = new MLBiomeGenHell(136)
-	.setColor(16711680).setBiomeName("Ellh").setDisableRain()
+	public static final BiomeGenBase LFocean = new LFBiomeGenOcean(128).setColor(112)
+			.setBiomeName("Crashing Ocean");
+	public static final BiomeGenBase LFplains = new LFBiomeGenPlains(129).setColor(9286496)
+			.setBiomeName("Crashing Plains");
+	public static final BiomeGenBase LFextremeHills = new LFBiomeGenHills(130, false)
+	.setColor(6316128).setBiomeName("Crashing Exhills");
+	public static final BiomeGenBase LFhell = new LFBiomeGenHell(136)
+	.setColor(16711680).setBiomeName("Crashing Hell").setDisableRain()
 	.setTemperatureRainfall(2.0F, 0.0F);
 	public LFBiomeBase() {
       this(biomeID);
@@ -52,12 +52,12 @@ public class LFBiomeBase extends BiomeGenBase{
     	return INSTANCE;
     }
 	static{
-		explorationBiomesList.remove(MLhell);
+		explorationBiomesList.remove(LFhell);
 	}
 	public static void registerWithBiomeDictionary() {
-		BiomeDictionary.registerBiomeType(MLocean, new BiomeDictionary.Type[] {});
-		BiomeDictionary.registerBiomeType(MLplains, new BiomeDictionary.Type[] {});
-		BiomeDictionary.registerBiomeType(MLextremeHills, new BiomeDictionary.Type[] {});
-		BiomeDictionary.registerBiomeType(MLhell, new BiomeDictionary.Type[] {});
+		BiomeDictionary.registerBiomeType(LFocean, new BiomeDictionary.Type[] {});
+		BiomeDictionary.registerBiomeType(LFplains, new BiomeDictionary.Type[] {});
+		BiomeDictionary.registerBiomeType(LFextremeHills, new BiomeDictionary.Type[] {});
+		BiomeDictionary.registerBiomeType(LFhell, new BiomeDictionary.Type[] {});
 	}
 }

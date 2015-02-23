@@ -12,6 +12,7 @@ import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
@@ -133,24 +134,24 @@ public class LFEntitySlimeBoss extends EntityMob implements IBossDisplayData{
             {
                 this.playSound(this.getJumpSound(), this.getSoundVolume(), ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F) / 0.8F);
             }
-            double d2 = (double)this.posX;
-            double d3 = (double)this.posY;
-            double d4 = (double)this.posZ;
             spawnSlaveChance += 1;
-            if(spawnSlaveChance >= 5 && spawnSlaveChance < 10){
-                Entity entity1 = EntityList.createEntityByID(55, worldObj);
-                entity1.setLocationAndAngles(d2, d3, d4, 300.0F, 0.0F);
-            	worldObj.spawnEntityInWorld(entity1);
-                Entity entity2 = EntityList.createEntityByName("LFSlime", worldObj);
-                entity2.setLocationAndAngles(d2, d3, d4, 240.0F, 0.0F);
-            	worldObj.spawnEntityInWorld(entity2);
+            if(spawnSlaveChance >= 5 && spawnSlaveChance <= 10){
+            	Entity entity = null;
+            	if(spawnSlaveChance == 5 || spawnSlaveChance == 7 || spawnSlaveChance == 9){
+            		entity = new EntitySlime(worldObj);
+            	}
+            	if(spawnSlaveChance == 6 || spawnSlaveChance == 8 || spawnSlaveChance == 10){
+            		entity = new LFEntitySlime(worldObj);
+            	}
+                entity.setLocationAndAngles(this.posX + (double)5, this.posY + 0.5D, this.posZ + (double)-5, this.rand.nextFloat() * 360.0F, 0.0F);
+            	worldObj.spawnEntityInWorld(entity);
             }
-        	if(spawnSlaveChance >= 10){
+        	if(spawnSlaveChance > 10){
         		if(this.getSlimeSize() < 16){
                 		this.setSlimeSize(this.getSlimeSize() << 1);			
         		}
         		if(this.getSlimeSize() >= 16){
-        			this.setDeadForTooBig();
+            		this.setSlimeSize(this.getSlimeSize() >> 3);
     		}
                 spawnSlaveChance = 0;
             }
@@ -164,35 +165,7 @@ public class LFEntitySlimeBoss extends EntityMob implements IBossDisplayData{
         this.field_175452_bi = this.onGround;
         this.alterSquishAmount();
     }
-    public void setDeadForTooBig()
-    {
-        int i = this.getSlimeSize();
 
-        if (!this.worldObj.isRemote && i > 1 && this.getHealth() <= 0.0F)
-        {
-            int j = 2;
-
-            for (int k = 0; k < j; ++k)
-            {
-                float f = ((float)(k % 2) - 0.5F) * (float)i / 4.0F;
-                float f1 = ((float)(k / 2) - 0.5F) * (float)i / 4.0F;
-                LFEntitySlimeBoss entityslime = this.createInstance();
-                if (this.hasCustomName())
-                {
-                    entityslime.setCustomNameTag(this.getCustomNameTag());
-                }
-
-                if (this.isNoDespawnRequired())
-                {
-                    entityslime.enablePersistence();
-                }
-                entityslime.setSlimeSize(i / (this.rand.nextInt(4) + 2));
-                entityslime.setLocationAndAngles(this.posX + (double)f, this.posY + 0.5D, this.posZ + (double)f1, this.rand.nextFloat() * 360.0F, 0.0F);
-                this.worldObj.spawnEntityInWorld(entityslime);
-            }
-        }
-        super.setDead();
-    }
     protected void alterSquishAmount()
     {
         this.squishAmount *= 0.6F;

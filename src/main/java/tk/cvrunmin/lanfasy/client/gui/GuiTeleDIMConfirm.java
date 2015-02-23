@@ -28,8 +28,8 @@ public class GuiTeleDIMConfirm extends GuiScreen {
 	}
     public void initGui()
     {
-        this.buttonList.add(new GuiLFOptionButton(0, this.width / 2 - 155, this.height / 6 + 196, this.confirmButtonText));
-        this.buttonList.add(new GuiLFOptionButton(1, this.width / 2 - 155 + 160, this.height / 6 + 196, this.cancelButtonText));
+        this.buttonList.add(new GuiLFOptionButton(0, this.width / 2 - 155, this.height / 6 + 96, this.confirmButtonText));
+        this.buttonList.add(new GuiLFOptionButton(1, this.width / 2 - 155 + 160, this.height / 6 + 96, this.cancelButtonText));
         try{
         	worldProvider = DimensionManager.getProvider(tryDIMid);
         }
@@ -60,9 +60,9 @@ public class GuiTeleDIMConfirm extends GuiScreen {
     public void drawScreen(int par1, int par2, float par3)
     {
     	this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, I18n.format("gui.tele.q1", new Object[0]), this.width / 2, 70, 16777215);
-        this.drawCenteredString(this.fontRendererObj, I18n.format("world.info.dimid", new Object[0]) + (!success ? "ERROR" : worldProvider.getDimensionId()), this.width / 2, 100, 16777215);
-        this.drawCenteredString(this.fontRendererObj, I18n.format("world.info.dimName", new Object[0]) + (!success ? "ERROR" : worldProvider.getDimensionName()), this.width / 2, 120, 16777215);
+        this.drawCenteredString(this.fontRendererObj, I18n.format("gui.teledim.q1", new Object[0]), this.width / 2, 70, 16777215);
+        this.drawCenteredString(this.fontRendererObj, I18n.format("world.info.dimid", new Object[0]) + " : " + (!success ? "ERROR" : worldProvider.getDimensionId()), this.width / 2, 100, 16777215);
+        this.drawCenteredString(this.fontRendererObj, I18n.format("world.info.dimName", new Object[0]) + " : " + (!success ? "ERROR" : worldProvider.getDimensionName()), this.width / 2, 120, 16777215);
     	super.drawScreen(par1, par2, par3);
     }
 }

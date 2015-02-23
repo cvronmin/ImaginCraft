@@ -208,6 +208,10 @@ public class LFEntityCreeper extends EntityMob{
     {
         return true;
     }
+    public LFEntityCreeper setPowered(byte par1){
+        this.dataWatcher.updateObject(17, Byte.valueOf(par1 > 1 ? 1 :(par1 < 0 ? 0 : par1)));
+        return this;
+    }
     public boolean getPowered()
     {
         return this.dataWatcher.getWatchableObjectByte(17) == 1;

@@ -1,0 +1,70 @@
+{
+    "__createdwith": "opl's Model Creator",
+    "ambientocclusion": false,
+    "textures": {
+        "layer0": "lanfasy:blocks/lightless_1",
+        "layer1": "lanfasy:blocks/lightless_0"
+    },
+    "elements": [
+        {
+            "from": [ 6, 6, 6 ],
+            "to": [ 10, 10, 10 ],
+            "faces": {
+                "up": {
+                    "uv": [ 6, 6, 10, 10 ],
+                    "texture": "#layer0"
+                },
+                "down": {
+                    "uv": [ 6, 6, 10, 10 ],
+                    "texture": "#layer0"
+                },
+                "west": {
+                    "uv": [ 6, 6, 10, 10 ],
+                    "texture": "#layer0"
+                },
+                "east": {
+                    "uv": [ 6, 6, 10, 10 ],
+                    "texture": "#layer0"
+                },
+                "north": {
+                    "uv": [ 6, 6, 10, 10 ],
+                    "texture": "#layer0"
+                },
+                "south": {
+                    "uv": [ 6, 6, 10, 10 ],
+                    "texture": "#layer0"
+                }
+            }
+        },
+        {
+            "from": [ 0, 0, 0 ],
+            "to": [ 16, 16, 16 ],
+            "faces": {
+                "up": {
+                    "uv": [ 0, 0, 16, 16 ],
+                    "texture": "#layer1"
+                },
+                "down": {
+                    "uv": [ 0, 0, 16, 16 ],
+                    "texture": "#layer1"
+                },
+                "west": {
+                    "uv": [ 0, 0, 16, 16 ],
+                    "texture": "#layer1"
+                },
+                "east": {
+                    "uv": [ 0, 0, 16, 16 ],
+                    "texture": "#layer1"
+                },
+                "north": {
+                    "uv": [ 0, 0, 16, 16 ],
+                    "texture": "#layer1"
+                },
+                "south": {
+                    "uv": [ 0, 0, 16, 16 ],
+                    "texture": "#layer1"
+                }
+            }
+        }
+    ]
+}

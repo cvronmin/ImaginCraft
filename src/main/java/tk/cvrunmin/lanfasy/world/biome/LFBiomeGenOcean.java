@@ -6,9 +6,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.ChunkPrimer;
 
-public class MLBiomeGenOcean extends LFBiomeBase{
+public class LFBiomeGenOcean extends LFBiomeBase{
 
-    public MLBiomeGenOcean(int p_i1985_1_)
+    public LFBiomeGenOcean(int p_i1985_1_)
     {
         super(p_i1985_1_);
         this.spawnableCreatureList.clear();

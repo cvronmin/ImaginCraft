@@ -9,7 +9,7 @@ import tk.cvrunmin.lanfasy.client.renderer.RenderLFCreeper;
 import tk.cvrunmin.lanfasy.entity.LFEntityCreeper;
 
 public class LayerLFCreeperCharge implements LayerRenderer{
-    private static final ResourceLocation LIGHTNING_TEXTURE = new ResourceLocation("textures/entity/creeper/creeper_armor.png");
+    private static final ResourceLocation LIGHTNING_TEXTURE = new ResourceLocation("lanfasy", "textures/entity/creeper/creeper_armor.png");
     private final RenderLFCreeper creeperRenderer;
     private final ModelLFCreeper creeperModel = new ModelLFCreeper(2.0F);
 

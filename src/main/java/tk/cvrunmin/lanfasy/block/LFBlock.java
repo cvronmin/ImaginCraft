@@ -7,7 +7,7 @@ import net.minecraft.block.material.Material;
 
 public class LFBlock extends Block{
 	private String registeredName;
-	private Random rand = new Random();
+	protected Random rand = new Random();
 	public LFBlock(Material materialIn) {
 		super(materialIn);
 	}
@@ -21,7 +21,8 @@ public class LFBlock extends Block{
 		}
 		return name;
 	}
-	public void setRegisteredName(String registerName) {
+	public LFBlock setRegisteredName(String registerName) {
 		this.registeredName = registerName;
+		return this;
 	}
 }

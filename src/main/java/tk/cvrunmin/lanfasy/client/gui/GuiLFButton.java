@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiLFButton extends GuiButton{
-    protected static final ResourceLocation buttonTextures = new ResourceLocation("textures/gui/LFwidgets.png");
+    protected static final ResourceLocation buttonTextures = new ResourceLocation("lanfasy", "textures/gui/widgets.png");
     /** Button width in pixels */
     protected int width;
     /** Button height in pixels */
