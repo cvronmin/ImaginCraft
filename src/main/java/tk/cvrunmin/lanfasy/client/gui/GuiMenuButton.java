@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class GuiMenuButton extends GuiButton{
-    protected static final ResourceLocation buttonTextures = new ResourceLocation("textures/gui/menuButton.png");
+    protected static final ResourceLocation buttonTextures = new ResourceLocation("lanfasy", "textures/gui/menuButton.png");
     /** Button width in pixels */
     protected int width;
     /** Button height in pixels */

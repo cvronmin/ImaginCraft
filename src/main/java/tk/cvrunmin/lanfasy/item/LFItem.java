@@ -19,7 +19,8 @@ public class LFItem extends Item {
 		return name;
 	}
 
-	public void setRegisteredName(String registeredName) {
+	public LFItem setRegisteredName(String registeredName) {
 		this.registeredName = registeredName;
+		return this;
 	}
 }

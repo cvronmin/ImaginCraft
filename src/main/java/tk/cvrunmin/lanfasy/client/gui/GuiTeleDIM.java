@@ -55,7 +55,7 @@ public class GuiTeleDIM extends GuiScreen{
     {
     	boolean isNum = (par2 >= 2 && par2 <= 11) || (par2 >= 71 && par2 <= 73) || (par2 >= 75 && par2 <= 77) || (par2 >= 79 && par2 <= 82);
     	boolean isArrow = par2 == Keyboard.KEY_UP || par2 == Keyboard.KEY_LEFT || par2 == Keyboard.KEY_RIGHT || par2 == Keyboard.KEY_DOWN;
-    	if((isNum || isArrow || par2 == 14 || par2 == 211) && !isShiftKeyDown()){
+    	if(((isNum || isArrow || par2 == 14 || par2 == 211) || (par2 == Keyboard.KEY_MINUS && this.textField.getText().trim().length() == 0)) && !isShiftKeyDown()){
         this.textField.textboxKeyTyped(par1, par2);
     	}
         ((GuiButton)this.buttonList.get(1)).enabled = this.textField.getText().trim().length() > 0;

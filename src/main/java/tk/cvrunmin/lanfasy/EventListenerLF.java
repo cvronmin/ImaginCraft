@@ -8,6 +8,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
@@ -15,8 +18,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tk.cvrunmin.lanfasy.client.gui.GuiIngameMenuVan;
 import tk.cvrunmin.lanfasy.client.gui.GuiLFIngameMenu;
 import tk.cvrunmin.lanfasy.client.gui.GuiLFIngameMenuT2;
+import tk.cvrunmin.lanfasy.client.gui.GuiLFIngameMenuT3;
 import tk.cvrunmin.lanfasy.util.LFConfig;
 
 public class EventListenerLF {
@@ -37,6 +42,19 @@ public class EventListenerLF {
 	@SubscribeEvent
 	public void onChangeDIM(PlayerEvent.PlayerChangedDimensionEvent event){
 		EventListenerLF.nowDIMid = event.toDim;
+		if(event.toDim == 1010){
+        WorldServer worldserver = MinecraftServer.getServer().worldServers[0];
+        WorldInfo worldinfo = worldserver.getWorldInfo();
+        worldinfo.setRaining(true);
+        worldinfo.setThundering(true);
+		}
+		if(event.fromDim == 1010 && event.toDim == 0){
+	        WorldServer worldserver = MinecraftServer.getServer().worldServers[0];
+	        WorldInfo worldinfo = worldserver.getWorldInfo();
+	        worldinfo.setRainTime(1);
+	        worldinfo.setRaining(true);
+	        worldinfo.setThundering(false);
+			}
 	}
 	@SubscribeEvent
 	public void pickupItem(EntityItemPickupEvent event) {
@@ -66,32 +84,63 @@ public class EventListenerLF {
 	@SubscribeEvent
 	public void onGuiOpened(GuiOpenEvent event){
 		if(LFConfig.newIngameMenu){
-			if(LFConfig.newMenuID == 0)
-			{
-//				if(event.gui instanceof GuiIngameMenu && (FMLClientHandler.instance().getClient().thePlayer.dimension == 1010 ||
-//					   FMLClientHandler.instance().getClient().thePlayer.dimension == -1011))
-				if(event.gui instanceof GuiIngameMenu)
+			switch(LFConfig.newMenuID){
+			case 0:
+				if(event.gui instanceof GuiIngameMenu && (FMLClientHandler.instance().getClient().thePlayer.dimension == 1010 ||
+				   FMLClientHandler.instance().getClient().thePlayer.dimension == -1011))
 				{
-					event.gui = new GuiIngameMenu();
+				event.gui = new GuiIngameMenuVan();
+				}
+				break;
+			case 1:
+				if(event.gui instanceof GuiIngameMenu && (FMLClientHandler.instance().getClient().thePlayer.dimension == 1010 ||
+				   FMLClientHandler.instance().getClient().thePlayer.dimension == -1011))
+			    {
+				event.gui = new GuiLFIngameMenu();
+			    }
+				break;
+			case 2:
+				if(event.gui instanceof GuiIngameMenu && (FMLClientHandler.instance().getClient().thePlayer.dimension == 1010 ||
+				   FMLClientHandler.instance().getClient().thePlayer.dimension == -1011))
+			    {
+				event.gui = new GuiLFIngameMenuT2();
+			    }
+				break;
+			case 3:
+				if(event.gui instanceof GuiIngameMenu && (FMLClientHandler.instance().getClient().thePlayer.dimension == 1010 ||
+				   FMLClientHandler.instance().getClient().thePlayer.dimension == -1011))
+			    {
+				event.gui = new GuiLFIngameMenuT3();
+			    }
+				break;
+			}
+/*			if(LFConfig.newMenuID == 0)
+			{
+				if(event.gui instanceof GuiIngameMenu && (FMLClientHandler.instance().getClient().thePlayer.dimension == 1010 ||
+					   FMLClientHandler.instance().getClient().thePlayer.dimension == -1011))
+				{
+					event.gui = new GuiIngameMenuVan();
 			    }
 		    }
 			else if(LFConfig.newMenuID == 1)
 			{
-//				if(event.gui instanceof GuiIngameMenu && (FMLClientHandler.instance().getClient().thePlayer.dimension == 1010 ||
-//					   FMLClientHandler.instance().getClient().thePlayer.dimension == -1011))
-				if(event.gui instanceof GuiIngameMenu)
+				if(event.gui instanceof GuiIngameMenu && (FMLClientHandler.instance().getClient().thePlayer.dimension == 1010 ||
+					   FMLClientHandler.instance().getClient().thePlayer.dimension == -1011))
 				{
 					event.gui = new GuiLFIngameMenuT2();
 				}
 			}
 			else if(LFConfig.newMenuID == 2)
 			{
-//				if(event.gui instanceof GuiIngameMenu && (FMLClientHandler.instance().getClient().thePlayer.dimension == 1010 ||
-//					   FMLClientHandler.instance().getClient().thePlayer.dimension == -1011))
-				if(event.gui instanceof GuiIngameMenu)
+				if(event.gui instanceof GuiIngameMenu && (FMLClientHandler.instance().getClient().thePlayer.dimension == 1010 ||
+					   FMLClientHandler.instance().getClient().thePlayer.dimension == -1011))
 				{
 					event.gui = new GuiLFIngameMenu();
 				}
+			}*/
+			if(event.gui instanceof GuiIngameMenu && FMLClientHandler.instance().getClient().thePlayer.dimension != 1010 &&
+					   FMLClientHandler.instance().getClient().thePlayer.dimension != -1011){
+				event.gui = new GuiIngameMenuVan();
 			}
 		}
 /*			if(event.gui instanceof GuiInventory && (FMLClientHandler.instance().getClient().thePlayer.dimension == MLDIM.DIMID ||
