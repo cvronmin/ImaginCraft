@@ -8,11 +8,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import tk.cvrunmin.fansy.api.block.FBlockContainer;
 import tk.cvrunmin.lanfasy.Lanfasy;
+import tk.cvrunmin.lanfasy.tileentity.TileEntityDimChanger;
 
-public class BlockDIMChanger extends LFBlockContainer{
+public class BlockDIMChanger extends FBlockContainer{
 
-	public BlockDIMChanger(Material materialIn) {
+	public BlockDIMChanger() {
 		super(Material.rock);
         this.setCreativeTab(CreativeTabs.tabDecorations);
         this.setUnlocalizedName("dim_change");
@@ -33,6 +35,10 @@ public class BlockDIMChanger extends LFBlockContainer{
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		// TODO Auto-generated method stub
-		return null;
+		return new TileEntityDimChanger();
 	}
+    public int getRenderType()
+    {
+        return 3;
+    }
 }

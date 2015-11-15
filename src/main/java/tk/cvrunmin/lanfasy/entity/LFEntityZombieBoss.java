@@ -53,10 +53,10 @@ public class LFEntityZombieBoss extends EntityMob implements IBossDisplayData{
     private float zombieHeight;
 	public LFEntityZombieBoss(World worldIn) {
 		super(worldIn);
-        ((PathNavigateGround)this.getNavigator()).func_179688_b(true);
+        ((PathNavigateGround)this.getNavigator()).setBreakDoors(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
-        this.tasks.addTask(2, this.field_175455_a);
+        this.tasks.addTask(2, this.aiAvoidExplodingCreepers);
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -229,7 +229,7 @@ public class LFEntityZombieBoss extends EntityMob implements IBossDisplayData{
             LFEntityZombie entityzombie = new LFEntityZombie(this.worldObj);
             entityzombie.copyLocationAndAnglesFrom(entityLivingIn);
             this.worldObj.removeEntity(entityLivingIn);
-            entityzombie.func_180482_a(this.worldObj.getDifficultyForLocation(new BlockPos(entityzombie)), (IEntityLivingData)null);
+            entityzombie.onInitialSpawn(this.worldObj.getDifficultyForLocation(new BlockPos(entityzombie)), (IEntityLivingData)null);
             entityzombie.setVillager(true);
 
             if (entityLivingIn.isChild())
@@ -245,9 +245,9 @@ public class LFEntityZombieBoss extends EntityMob implements IBossDisplayData{
     {
         return p_175448_1_.getItem() == Items.egg && this.isChild() && this.isRiding() ? false : super.func_175448_a(p_175448_1_);
     }
-    public IEntityLivingData func_180482_a(DifficultyInstance p_180482_1_, IEntityLivingData p_180482_2_)
+    public IEntityLivingData onInitialSpawn(DifficultyInstance p_180482_1_, IEntityLivingData p_180482_2_)
     {
-        Object p_180482_2_1 = super.func_180482_a(p_180482_1_, p_180482_2_);
+        Object p_180482_2_1 = super.onInitialSpawn(p_180482_1_, p_180482_2_);
         float f = p_180482_1_.getClampedAdditionalDifficulty();
         this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * f);
 
@@ -262,8 +262,8 @@ public class LFEntityZombieBoss extends EntityMob implements IBossDisplayData{
         }
 
         this.func_146070_a(this.rand.nextFloat() < f * 0.1F);
-        this.func_180481_a(p_180482_1_);
-        this.func_180483_b(p_180482_1_);
+        this.setEquipmentBasedOnDifficulty(p_180482_1_);
+        this.setEnchantmentBasedOnDifficulty(p_180482_1_);
 
         if (this.getEquipmentInSlot(4) == null)
         {

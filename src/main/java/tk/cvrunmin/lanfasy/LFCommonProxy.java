@@ -4,15 +4,13 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
-import tk.cvrunmin.lanfasy.block.LFBlock;
-import tk.cvrunmin.lanfasy.item.LFItem;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import tk.cvrunmin.fansy.api.block.FBlock;
+import tk.cvrunmin.fansy.api.item.FItem;
 public class LFCommonProxy {
-	public void registerRenderers(Lanfasy main){
-		
+	public void init(FMLInitializationEvent event){
 	}
-	public void registerBlockRenderers(){}
-	public void registerItemRenderers(){}
-	protected void blockRend(LFBlock block){
+	protected void blockRend(FBlock block){
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0,
                 new ModelResourceLocation("lanfasy:" + block.getRegisteredName(), "inventory"));
 	}
@@ -20,7 +18,7 @@ public class LFCommonProxy {
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0,
                 new ModelResourceLocation("lanfasy:" + registerName, "inventory"));
 	}
-	protected void itemRend(LFItem item){
+	protected void itemRend(FItem item){
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0,
                 new ModelResourceLocation("lanfasy:" + item.getRegisteredName(), "inventory"));
 	}
@@ -28,7 +26,7 @@ public class LFCommonProxy {
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0,
                 new ModelResourceLocation("lanfasy:" + registerName, "inventory"));
 	}
-	protected void itemRend(LFItem item, int damage, String ideniter){
+	protected void itemRend(FItem item, int damage, String ideniter){
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, damage,
                 new ModelResourceLocation("lanfasy:" + ideniter, "inventory"));
 	}

@@ -13,7 +13,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemMonsterPlacer;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -21,28 +20,31 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tk.cvrunmin.fansy.api.block.FBlockBreakable;
 import tk.cvrunmin.lanfasy.init.LFBlocks;
 import tk.cvrunmin.lanfasy.world.TeleporterLF;
 
-public class BlockLFPortal extends LFBlockBreakable
+public class BlockLFPortal extends FBlockBreakable
 {
     public static final PropertyEnum AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class, new EnumFacing.Axis[] {EnumFacing.Axis.X, EnumFacing.Axis.Z});
-
+    
     public BlockLFPortal()
     {
+    	this(1010, LFBlocks.dremic, LFBlocks.lfportal);
+    }
+    public BlockLFPortal(int dim, Block frame, Block portal){
+    	this(0, dim, frame, portal);
+    }
+    public BlockLFPortal(int dim, int dim1, Block frame, Block portal){
         super(Material.portal, false);
         this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.X));
         this.setTickRandomly(true);
-        this.setRegisteredName("lf_portal");
         this.setHardness(-1.0F);
         this.setStepSound(soundTypeGlass);
         this.setLightLevel(0.75F);
-        this.setUnlocalizedName("portal");
     }
-
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         super.updateTick(worldIn, pos, state, rand);
@@ -203,12 +205,15 @@ public class BlockLFPortal extends LFBlockBreakable
 	                   thePlayer.timeUntilPortal = 10;
 	           }
 	           else if (thePlayer.dimension != 1010)
+//	           else if (thePlayer.dimension != 2048)
 	           {
 	                   thePlayer.timeUntilPortal = 10;
+//	                   thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, 2048, new TeleporterGenatic(thePlayer.mcServer.worldServerForDimension(2048)));
 	                   thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, 1010, new TeleporterLF(thePlayer.mcServer.worldServerForDimension(1010)));
 	           }
 	           else {
 	                   thePlayer.timeUntilPortal = 10;
+//	                   thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, 0, new TeleporterGenatic(thePlayer.mcServer.worldServerForDimension(0)));
 	                   thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, 0, new TeleporterLF(thePlayer.mcServer.worldServerForDimension(0)));
 	           }
         }

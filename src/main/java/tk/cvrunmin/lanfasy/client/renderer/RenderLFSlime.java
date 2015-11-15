@@ -1,5 +1,6 @@
 package tk.cvrunmin.lanfasy.client.renderer;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -19,9 +20,9 @@ public class RenderLFSlime extends RenderLiving
 {
     private static final ResourceLocation slimeTextures = new ResourceLocation(Lanfasy.MODID, "textures/entity/slime/slime.png");
 
-    public RenderLFSlime(RenderManager par1RenderManager, ModelBase par2ModelBase, float par3)
+    public RenderLFSlime(ModelBase par2ModelBase, float par3)
     {
-        super(par1RenderManager, par2ModelBase, par3);
+        super(Minecraft.getMinecraft().getRenderManager(), par2ModelBase, par3);
         this.addLayer(new LayerLFSlimeGel(this));
     }
 

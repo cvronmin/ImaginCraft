@@ -22,11 +22,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tk.cvrunmin.fansy.api.block.FBlock;
 import tk.cvrunmin.lanfasy.init.LFBlocks;
 
 import com.google.common.collect.Maps;
 
-public class BlockLFFire extends LFBlock
+public class BlockLFFire extends FBlock
 {
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 15);
     public static final PropertyBool FLIP = PropertyBool.create("flip");
@@ -391,6 +392,17 @@ public class BlockLFFire extends LFBlock
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
     {
         if (worldIn.provider.getDimensionId() > 0 || !LFBlocks.lfportal.func_176548_d(worldIn, pos))
+        {
+            if (!World.doesBlockHaveSolidTopSurface(worldIn, pos.down()) && !this.canNeighborCatchFire(worldIn, pos))
+            {
+                worldIn.setBlockToAir(pos);
+            }
+            else
+            {
+                worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn) + worldIn.rand.nextInt(10));
+            }
+        }
+        if (worldIn.provider.getDimensionId() != 1010 || !LFBlocks.portal_crashhell.func_176548_d(worldIn, pos))
         {
             if (!World.doesBlockHaveSolidTopSurface(worldIn, pos.down()) && !this.canNeighborCatchFire(worldIn, pos))
             {

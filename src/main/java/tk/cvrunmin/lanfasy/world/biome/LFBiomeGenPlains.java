@@ -27,7 +27,7 @@ public class LFBiomeGenPlains extends LFBiomeBase{
 
     public BlockFlower.EnumFlowerType pickRandomFlower(Random p_180623_1_, BlockPos p_180623_2_)
     {
-        double d0 = field_180281_af.func_151601_a((double)p_180623_2_.getX() / 200.0D, (double)p_180623_2_.getZ() / 200.0D);
+        double d0 = GRASS_COLOR_NOISE.func_151601_a((double)p_180623_2_.getX() / 200.0D, (double)p_180623_2_.getZ() / 200.0D);
         int i;
 
         if (d0 < -0.8D)
@@ -60,7 +60,7 @@ public class LFBiomeGenPlains extends LFBiomeBase{
 
     public void decorate(World worldIn, Random p_180624_2_, BlockPos p_180624_3_)
     {
-        double d0 = field_180281_af.func_151601_a((double)(p_180624_3_.getX() + 8) / 200.0D, (double)(p_180624_3_.getZ() + 8) / 200.0D);
+        double d0 = GRASS_COLOR_NOISE.func_151601_a((double)(p_180624_3_.getX() + 8) / 200.0D, (double)(p_180624_3_.getZ() + 8) / 200.0D);
         int i;
         int j;
         int k;
@@ -75,26 +75,26 @@ public class LFBiomeGenPlains extends LFBiomeBase{
         {
             this.theBiomeDecorator.flowersPerChunk = 4;
             this.theBiomeDecorator.grassPerChunk = 10;
-            DOUBLE_PLANT_GENERATOR.func_180710_a(BlockDoublePlant.EnumPlantType.GRASS);
+            DOUBLE_PLANT_GENERATOR.setPlantType(BlockDoublePlant.EnumPlantType.GRASS);
 
             for (i = 0; i < 7; ++i)
             {
                 j = p_180624_2_.nextInt(16) + 8;
                 k = p_180624_2_.nextInt(16) + 8;
-                l = p_180624_2_.nextInt(worldIn.getHorizon(p_180624_3_.add(j, 0, k)).getY() + 32);
+                l = p_180624_2_.nextInt(worldIn.getHeight(p_180624_3_.add(j, 0, k)).getY() + 32);
                 DOUBLE_PLANT_GENERATOR.generate(worldIn, p_180624_2_, p_180624_3_.add(j, l, k));
             }
         }
 
         if (this.field_150628_aC)
         {
-            DOUBLE_PLANT_GENERATOR.func_180710_a(BlockDoublePlant.EnumPlantType.SUNFLOWER);
+            DOUBLE_PLANT_GENERATOR.setPlantType(BlockDoublePlant.EnumPlantType.SUNFLOWER);
 
             for (i = 0; i < 10; ++i)
             {
                 j = p_180624_2_.nextInt(16) + 8;
                 k = p_180624_2_.nextInt(16) + 8;
-                l = p_180624_2_.nextInt(worldIn.getHorizon(p_180624_3_.add(j, 0, k)).getY() + 32);
+                l = p_180624_2_.nextInt(worldIn.getHeight(p_180624_3_.add(j, 0, k)).getY() + 32);
                 DOUBLE_PLANT_GENERATOR.generate(worldIn, p_180624_2_, p_180624_3_.add(j, l, k));
             }
         }

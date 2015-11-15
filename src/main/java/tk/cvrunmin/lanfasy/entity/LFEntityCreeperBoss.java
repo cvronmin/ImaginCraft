@@ -38,7 +38,7 @@ public class LFEntityCreeperBoss extends EntityMob implements IBossDisplayData{
 		this.setSize(4f, 4f);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAICreeperBossSwell(this));
-        this.tasks.addTask(2, this.field_175455_a);
+        this.tasks.addTask(2, this.aiAvoidExplodingCreepers);
         this.tasks.addTask(4, new EntityAIAttackOnCollide(this, 1.0D, false));
         this.tasks.addTask(5, new EntityAIWander(this, 0.8D));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -168,6 +168,7 @@ public class LFEntityCreeperBoss extends EntityMob implements IBossDisplayData{
             }
             ++spawnSlaveTime;
             if(spawnSlaveTime >= 2000){
+            	if(!this.worldObj.isRemote){
                 int j1 = 10 + this.rand.nextInt(10);
                 for (int k1 = 0; k1 < j1; ++k1)
                 {
@@ -187,6 +188,7 @@ public class LFEntityCreeperBoss extends EntityMob implements IBossDisplayData{
                     entity.setLocationAndAngles(this.posX + (double)f, this.posY + 0.5D, this.posZ + (double)f1, this.rand.nextFloat() * 360.0F, 0.0F);
                     this.worldObj.spawnEntityInWorld(entity);
                 }
+            	}
                 spawnSlaveTime = 0;
             }
         }

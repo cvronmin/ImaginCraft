@@ -30,7 +30,7 @@ public class TeleporterGenatic extends Teleporter{
 	}
     public void placeInPortal(Entity entityIn, float rotationYaw)
     {
-        if (this.worldServerInstance.provider.getDimensionId() != 1)
+        if (this.worldServerInstance.provider.getDimensionId() != 1 && this.worldServerInstance.provider.getDimensionId() != 512)
         {
             if (!this.placeInExistingPortal(entityIn, rotationYaw))
             {
@@ -40,7 +40,8 @@ public class TeleporterGenatic extends Teleporter{
         }
         else
         {
-            int i = MathHelper.floor_double(entityIn.posX);
+        	if(this.worldServerInstance.provider.getDimensionId() == 1){
+        	int i = MathHelper.floor_double(entityIn.posX);
             int j = MathHelper.floor_double(entityIn.posY) - 1;
             int k = MathHelper.floor_double(entityIn.posZ);
             byte b0 = 1;
@@ -63,6 +64,11 @@ public class TeleporterGenatic extends Teleporter{
 
             entityIn.setLocationAndAngles((double)i, (double)j, (double)k, entityIn.rotationYaw, 0.0F);
             entityIn.motionX = entityIn.motionY = entityIn.motionZ = 0.0D;
+        	}
+        	else if(this.worldServerInstance.provider.getDimensionId() == 512){
+                entityIn.setLocationAndAngles((double)0, (double)71, (double)5, entityIn.rotationYaw, 0.0F);
+                entityIn.motionX = entityIn.motionY = entityIn.motionZ = 0.0D;
+        	}
         }
     }
     /**

@@ -65,7 +65,7 @@ public class LFEntitySkeleton extends EntityMob implements IRangedAttackMob{
 	        super(par1World);
 	        this.tasks.addTask(1, new EntityAISwimming(this));
 	        this.tasks.addTask(2, new EntityAIRestrictSun(this));
-	        this.tasks.addTask(2, this.field_175455_a);
+	        this.tasks.addTask(2, this.aiArrowAttack);
 	        this.tasks.addTask(3, new EntityAIFleeSun(this, 1.0D));
 	        this.tasks.addTask(3, new EntityAIAvoidEntity(this, new Predicate()
 	        {
@@ -282,22 +282,14 @@ public class LFEntitySkeleton extends EntityMob implements IRangedAttackMob{
 	        }
 	    }
 
-	    /**
-	     * Makes entity wear random armor based on difficulty
-	     */
-	    protected void addRandomArmor()
+	    protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
 	    {
-	        super.addRandomArmor();
+	        super.setEquipmentBasedOnDifficulty(difficulty);
 	        this.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
 	    }
-	    protected void func_180481_a(DifficultyInstance p_180481_1_)
-	    {
-	        super.func_180481_a(p_180481_1_);
-	        this.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
-	    }
-    public IEntityLivingData func_180482_a(DifficultyInstance p_180482_1_, IEntityLivingData p_180482_2_)
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingdata)
     {
-        p_180482_2_ = super.func_180482_a(p_180482_1_, p_180482_2_);
+    	livingdata = super.onInitialSpawn(difficulty, livingdata);
 
         if (this.worldObj.provider instanceof WorldProviderHell && this.getRNG().nextInt(5) > 0)
         {
@@ -309,11 +301,11 @@ public class LFEntitySkeleton extends EntityMob implements IRangedAttackMob{
         else
         {
             this.tasks.addTask(4, this.aiArrowAttack);
-            this.func_180481_a(p_180482_1_);
-            this.func_180483_b(p_180482_1_);
+            this.setEquipmentBasedOnDifficulty(difficulty);
+            this.setEnchantmentBasedOnDifficulty(difficulty);
         }
 
-        this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * p_180482_1_.getClampedAdditionalDifficulty());
+        this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * difficulty.getClampedAdditionalDifficulty());
 
         if (this.getEquipmentInSlot(4) == null)
         {
@@ -326,7 +318,7 @@ public class LFEntitySkeleton extends EntityMob implements IRangedAttackMob{
             }
         }
 
-        return p_180482_2_;
+        return livingdata;
     }
 
 	    /**

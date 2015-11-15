@@ -67,14 +67,14 @@ public class LFEntityPigZombie extends LFEntityZombie
 
         if (this.isAngry())
         {
-            if (!this.isChild() && !iattributeinstance.func_180374_a(field_110190_br))
+            if (!this.isChild() && !iattributeinstance.hasModifier(field_110190_br))
             {
                 iattributeinstance.applyModifier(field_110190_br);
             }
 
             --this.angerLevel;
         }
-        else if (iattributeinstance.func_180374_a(field_110190_br))
+        else if (iattributeinstance.hasModifier(field_110190_br))
         {
             iattributeinstance.removeModifier(field_110190_br);
         }
@@ -242,24 +242,23 @@ public class LFEntityPigZombie extends LFEntityZombie
         this.setCurrentItemOrArmor(0, new ItemStack(Items.golden_sword));
     }
 
-    public IEntityLivingData func_180482_a(DifficultyInstance p_180482_1_, IEntityLivingData p_180482_2_)
+    public IEntityLivingData onInitialSpawn(DifficultyInstance p_180482_1_, IEntityLivingData p_180482_2_)
     {
-        super.func_180482_a(p_180482_1_, p_180482_2_);
+        super.onInitialSpawn(p_180482_1_, p_180482_2_);
         this.setVillager(false);
         return p_180482_2_;
     }
     class AIHurtByAggressor extends EntityAIHurtByTarget
     {
-        private static final String __OBFID = "CL_00002206";
 
         public AIHurtByAggressor()
         {
             super(LFEntityPigZombie.this, true, new Class[0]);
         }
 
-        protected void func_179446_a(EntityCreature p_179446_1_, EntityLivingBase p_179446_2_)
+        protected void setEntityAttackTarget(EntityCreature p_179446_1_, EntityLivingBase p_179446_2_)
         {
-            super.func_179446_a(p_179446_1_, p_179446_2_);
+            super.setEntityAttackTarget(p_179446_1_, p_179446_2_);
 
             if (p_179446_1_ instanceof LFEntityPigZombie)
             {

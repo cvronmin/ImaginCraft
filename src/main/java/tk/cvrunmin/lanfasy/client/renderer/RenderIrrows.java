@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import tk.cvrunmin.lanfasy.entity.projectile.EntityFireArrow;
 import tk.cvrunmin.lanfasy.entity.projectile.EntitySafeIrrow;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
@@ -16,9 +17,9 @@ import net.minecraft.util.ResourceLocation;
 public class RenderIrrows extends Render{
     private static final ResourceLocation arrowTextures = new ResourceLocation("lanfasy", "textures/entity/irrow.png");
 
-    public RenderIrrows(RenderManager p_i46193_1_)
+    public RenderIrrows()
     {
-        super(p_i46193_1_);
+        super(Minecraft.getMinecraft().getRenderManager());
     }
 
     public void doRender(EntitySafeIrrow p_180551_1_, double p_180551_2_, double p_180551_4_, double p_180551_6_, float p_180551_8_, float p_180551_9_)

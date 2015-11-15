@@ -1,5 +1,6 @@
 package tk.cvrunmin.lanfasy.client.renderer;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -19,9 +20,9 @@ import tk.cvrunmin.lanfasy.entity.LFEntitySlimeBoss;
 public class RenderSlimeBoss extends RenderLiving{
     private static final ResourceLocation slimeTextures = new ResourceLocation(Lanfasy.MODID, "textures/entity/slime/slimeBoss.png");
 	private ModelBase scaleAmount;
-    public RenderSlimeBoss(RenderManager par1RenderManager, ModelBase par2ModelBase, float par3)
+    public RenderSlimeBoss(ModelBase par2ModelBase, float par3)
     {
-        super(par1RenderManager, par2ModelBase, par3);
+        super(Minecraft.getMinecraft().getRenderManager(), par2ModelBase, par3);
         this.addLayer(new LayerLFSlimeGel(this));
     }
     public void doRender(LFEntitySlimeBoss p_177124_1_, double p_177124_2_, double p_177124_4_, double p_177124_6_, float p_177124_8_, float p_177124_9_)

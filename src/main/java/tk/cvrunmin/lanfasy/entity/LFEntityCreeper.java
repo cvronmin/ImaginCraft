@@ -44,26 +44,11 @@ public class LFEntityCreeper extends EntityMob{
     private int fuseTime = 30;
     private int explosionRadius = 3;
     private int field_175494_bm = 0;
-	public void registerRenderers(){
-		RenderingRegistry.registerEntityRenderingHandler(LFEntityCreeper.class, new RenderLFCreeper(Minecraft.getMinecraft().getRenderManager()));
-	}
-	public void serverLoad(FMLServerStartingEvent event){
-		
-	}
-	@SuppressWarnings("unchecked")
-	public void preInit(FMLPreInitializationEvent event){
-		EntityRegistry.registerGlobalEntityID(LFEntityCreeper.class, "Creeper(ML)", entityID);
-		EntityRegistry.registerModEntity(LFEntityCreeper.class, "Creeper(ML)", entityID, instance, 64, 1, true);
-		EntityList.entityEggs.put(Integer.valueOf(entityID), new EntityList.EntityEggInfo(entityID,  894731, 0));        
-	}
-	public void load() {
-	
-	}
 	public LFEntityCreeper(World worldIn) {
         super(worldIn);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAILFCreeperSwell(this));
-        this.tasks.addTask(2, this.field_175455_a);
+        this.tasks.addTask(2, this.aiAvoidExplodingCreepers);
         this.tasks.addTask(3, new EntityAIAvoidEntity(this, new Predicate()
         {
             public boolean func_179958_a(Entity p_179958_1_)

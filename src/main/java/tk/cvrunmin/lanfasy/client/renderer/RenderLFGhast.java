@@ -1,5 +1,6 @@
 package tk.cvrunmin.lanfasy.client.renderer;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -18,9 +19,9 @@ public class RenderLFGhast extends RenderLiving
     private static final ResourceLocation ghastTextures = new ResourceLocation(Lanfasy.MODID, "textures/entity/ghast/ghast.png");
     private static final ResourceLocation ghastShootingTextures = new ResourceLocation(Lanfasy.MODID, "textures/entity/ghast/ghast_shooting.png");
 
-    public RenderLFGhast(RenderManager renderManager)
+    public RenderLFGhast()
     {
-        super(renderManager, new ModelLFGhast(), 0.5F);
+        super(Minecraft.getMinecraft().getRenderManager(), new ModelLFGhast(), 0.5F);
     }
 
     /**

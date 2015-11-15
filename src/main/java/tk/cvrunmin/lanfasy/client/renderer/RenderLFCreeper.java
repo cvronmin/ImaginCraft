@@ -1,5 +1,6 @@
 package tk.cvrunmin.lanfasy.client.renderer;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -18,9 +19,9 @@ import tk.cvrunmin.lanfasy.entity.LFEntityCreeper;
 public class RenderLFCreeper extends RenderLiving
 {
     private static final ResourceLocation creeperTextures = new ResourceLocation("lanfasy", "textures/entity/creeper/creeper.png");
-    public RenderLFCreeper(RenderManager p_i46186_1_)
+    public RenderLFCreeper()
     {
-        super(p_i46186_1_, new ModelLFCreeper(), 0.5F);
+        super(Minecraft.getMinecraft().getRenderManager(), new ModelLFCreeper(), 0.5F);
         this.addLayer(new LayerLFCreeperCharge(this));
     }
     protected void func_180570_a(LFEntityCreeper p_180570_1_, float p_180570_2_)

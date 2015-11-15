@@ -31,18 +31,16 @@ public class GuiTeleDIMConfirm extends GuiScreen {
         this.buttonList.add(new GuiLFOptionButton(0, this.width / 2 - 155, this.height / 6 + 96, this.confirmButtonText));
         this.buttonList.add(new GuiLFOptionButton(1, this.width / 2 - 155 + 160, this.height / 6 + 96, this.cancelButtonText));
         try{
-        	worldProvider = DimensionManager.getProvider(tryDIMid);
+        	worldProvider = WorldProvider.getProviderForDimension(tryDIMid);
+        	if(worldProvider instanceof WorldProvider && worldProvider != null){
+        		success = true;
+        	}
         }
         catch(Exception e){
         	worldProvider = null;
         	success = false;
         }
-        finally{
-        	if(worldProvider instanceof WorldProvider && worldProvider != null){
-        		success = true;
-        	}
             ((GuiButton)this.buttonList.get(0)).enabled = success;
-        }
     }
     protected void actionPerformed(GuiButton p_146284_1_)
     {

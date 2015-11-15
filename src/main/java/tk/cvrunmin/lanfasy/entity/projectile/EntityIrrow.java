@@ -205,7 +205,7 @@ public class EntityIrrow extends EntitySafeIrrow implements IProjectile{
         ++ticksExplosing;
         if(ticksExplosing > LFConfig.startIon){
             boolean flag1 = this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
-        	worldObj.createExplosion(this, this.posX, this.posY, this.posZ, affectedRadius, flag1);
+//        	worldObj.createExplosion(this, this.posX, this.posY, this.posZ, affectedRadius, flag1);
             Ionplozation explosion1 = new Ionplozation(worldObj, this, this.posX, this.posY, this.posZ, affectedRadius, false, flag1);
             if (net.minecraftforge.event.ForgeEventFactory.onExplosionStart(worldObj, explosion1)) return;
             explosion1.doExplosionC();
@@ -218,7 +218,7 @@ public class EntityIrrow extends EntitySafeIrrow implements IProjectile{
         if (this.inGround)
         {
             boolean flag = this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
-        	worldObj.createExplosion(this, this.posX, this.posY, this.posZ, affectedRadius, flag);
+//        	worldObj.createExplosion(this, this.posX, this.posY, this.posZ, affectedRadius, flag);
             Ionplozation explosion = new Ionplozation(worldObj, this, this.posX, this.posY, this.posZ, affectedRadius, false, flag);
             if (net.minecraftforge.event.ForgeEventFactory.onExplosionStart(worldObj, explosion)) return;
             explosion.doExplosionA();
@@ -338,8 +338,8 @@ public class EntityIrrow extends EntitySafeIrrow implements IProjectile{
 
                             if (this.shootingEntity instanceof EntityLivingBase)
                             {
-                                EnchantmentHelper.func_151384_a(entitylivingbase, this.shootingEntity);
-                                EnchantmentHelper.func_151385_b((EntityLivingBase)this.shootingEntity, entitylivingbase);
+                                EnchantmentHelper.applyThornEnchantments(entitylivingbase, this.shootingEntity);
+                                EnchantmentHelper.applyArthropodEnchantments((EntityLivingBase)this.shootingEntity, entitylivingbase);
                             }
 
                             if (this.shootingEntity != null && movingobjectposition.entityHit != this.shootingEntity && movingobjectposition.entityHit instanceof EntityPlayer && this.shootingEntity instanceof EntityPlayerMP)

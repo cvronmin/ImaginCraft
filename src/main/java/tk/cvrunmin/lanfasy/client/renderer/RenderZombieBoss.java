@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelGuardian;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -32,9 +33,9 @@ public class RenderZombieBoss extends RenderLiving{
     private static final ResourceLocation zombieTextures = new ResourceLocation(Lanfasy.MODID, "textures/entity/zombie/zombieBoss.png");
 	private ModelZombieBoss field_82434_o;
 
-    public RenderZombieBoss(RenderManager p_i46127_1_)
+    public RenderZombieBoss()
     {
-        super(p_i46127_1_, new ModelZombieBoss(), 0.5F);
+        super(Minecraft.getMinecraft().getRenderManager(), new ModelZombieBoss(), 0.5F);
         this.addLayer(new LayerHeldItem(this));
     }
 

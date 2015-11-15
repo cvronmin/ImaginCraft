@@ -12,6 +12,7 @@ import net.minecraft.client.gui.achievement.GuiAchievements;
 import net.minecraft.client.gui.achievement.GuiStats;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.resources.I18n;
+import net.minecraftforge.fml.client.config.HoverChecker;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -19,13 +20,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class GuiIngameMenuVan extends GuiIngameMenu{
     private int field_146445_a;
     private int field_146444_f;
-
+    protected HoverChecker HoverChecker1024;
     public void initGui()
     {
     	super.initGui();
         this.field_146445_a = 0;
         byte b0 = -16;
-        this.buttonList.add(new GuiLFButton(1024, this.width / 2 - 100, this.height / 4 + 142 + b0, I18n.format("gui.teledim", new Object[0])));
+        GuiLFButton button1;
+        this.buttonList.add(button1 = new GuiLFButton(1024, this.width / 2 - 100, this.height / 4 + 142 + b0, I18n.format("gui.teledim", new Object[0])));
+        if (!this.mc.isIntegratedServerRunning())
+        {
+            button1.enabled = false;
+        }
+        this.HoverChecker1024 = new HoverChecker(button1, 200);
     }
 
     protected void actionPerformed(GuiButton button) throws IOException
@@ -79,5 +86,7 @@ public class GuiIngameMenuVan extends GuiIngameMenu{
 //        this.drawDefaultBackground();
 //        this.drawCenteredString(this.fontRendererObj, I18n.format("menu.game", new Object[0]), this.width / 2, 40, 16777215);
         super.drawScreen(mouseX, mouseY, partialTicks);
+        if (this.HoverChecker1024.checkHover(mouseX, mouseY))
+            this.drawHoveringText(this.mc.fontRendererObj.listFormattedStringToWidth(I18n.format("gui.teledim.warn"), 150), mouseX, mouseY);
     }
 }

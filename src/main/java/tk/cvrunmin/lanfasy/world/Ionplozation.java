@@ -113,7 +113,7 @@ public class Ionplozation extends Explosion{
         {
             Entity entity = (Entity)list.get(l1);
 
-            if (!entity.func_180427_aV())
+            if (!entity.isImmuneToExplosions())
             {
                 double d12 = entity.getDistance(this.explosionX, this.explosionY, this.explosionZ) / (double)f3;
 
@@ -131,16 +131,16 @@ public class Ionplozation extends Explosion{
                         d9 /= d13;
                         double d14 = (double)this.worldObj.getBlockDensity(vec3, entity.getEntityBoundingBox());
                         double d10 = (1.0D - d12) * d14;
-                        entity.attackEntityFrom(DamageSourceLF.setExplosionSource(this), Float.MAX_VALUE);
+                        entity.attackEntityFrom(DamageSourceLF.setIonplozationSource(this), Float.MAX_VALUE);
                         double d11 = EnchantmentProtection.func_92092_a(entity, d10);
                         entity.motionX += d5 * d11;
                         entity.motionY += d7 * d11;
                         entity.motionZ += d9 * d11;
 
-                        if (entity instanceof EntityPlayer)
+/*                        if (entity instanceof EntityPlayer)
                         {
                             this.field_77288_k.put((EntityPlayer)entity, new Vec3(d5 * d10, d7 * d10, d9 * d10));
-                        }
+                        }*/
                     }
                 }
             }
@@ -241,7 +241,7 @@ public class Ionplozation extends Explosion{
         {
             Entity entity = (Entity)list.get(l1);
 
-            if (!entity.func_180427_aV())
+            if (!entity.isImmuneToExplosions())
             {
                 double d12 = entity.getDistance(this.explosionX, this.explosionY, this.explosionZ) / (double)f3;
 
@@ -259,16 +259,16 @@ public class Ionplozation extends Explosion{
                         d9 /= d13;
                         double d14 = (double)this.worldObj.getBlockDensity(vec3, entity.getEntityBoundingBox());
                         double d10 = (1.0D - d12) * d14;
-                        entity.attackEntityFrom(DamageSourceLF.setExplosionSource(this), Float.MAX_VALUE);
+                        entity.attackEntityFrom(DamageSourceLF.setIonplozationSource(this), Float.MAX_VALUE);
                         double d11 = EnchantmentProtection.func_92092_a(entity, d10);
                         entity.motionX += d5 * d11;
                         entity.motionY += d7 * d11;
                         entity.motionZ += d9 * d11;
 
-                        if (entity instanceof EntityPlayer)
+/*                        if (entity instanceof EntityPlayer)
                         {
                             this.field_77288_k.put((EntityPlayer)entity, new Vec3(d5 * d10, d7 * d10, d9 * d10));
-                        }
+                        }*/
                     }
                 }
             }

@@ -94,14 +94,12 @@ public class GuiMenuButton extends GuiButton{
      * Fired when the mouse button is dragged. Equivalent of MouseListener.mouseDragged(MouseEvent e).
      */
     protected void mouseDragged(Minecraft p_146119_1_, int p_146119_2_, int p_146119_3_) {
-    	super.mouseDragged(p_146119_1_, p_146119_2_, p_146119_3_);
     }
 
     /**
      * Fired when the mouse button is released. Equivalent of MouseListener.mouseReleased(MouseEvent e).
      */
     public void mouseReleased(int p_146118_1_, int p_146118_2_) {
-    	super.mouseReleased(p_146118_1_, p_146118_2_);
     }
 
     /**
@@ -110,8 +108,7 @@ public class GuiMenuButton extends GuiButton{
      */
     public boolean mousePressed(Minecraft p_146116_1_, int p_146116_2_, int p_146116_3_)
     {
-    	return super.mousePressed(p_146116_1_, p_146116_2_, p_146116_3_);
-//        return this.enabled && this.visible && p_146116_2_ >= this.xPosition && p_146116_3_ >= this.yPosition && p_146116_2_ < this.xPosition + this.width && p_146116_3_ < this.yPosition + this.height;
+        return this.enabled && this.visible && p_146116_2_ >= this.xPosition && p_146116_3_ >= this.yPosition && p_146116_2_ < this.xPosition + this.width && p_146116_3_ < this.yPosition + this.height;
     }
     public boolean func_146115_a()
     {

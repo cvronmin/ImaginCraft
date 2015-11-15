@@ -24,7 +24,7 @@ public class PlayerUtil {
 
 			entityplayermp = (EntityPlayerMP) iterator.next();
 			}
-			while (!entityplayermp.getName().equalsIgnoreCase(username));
+			while (!entityplayermp.getCommandSenderName().equalsIgnoreCase(username));
 			return entityplayermp;
 		}
 		FMLRelaunchLog.log("Lanfasy", Level.ERROR, "Couldn't find server");
@@ -41,6 +41,6 @@ public class PlayerUtil {
 			return (EntityPlayerMP) player;
 		}
 
-		return PlayerUtil.getPlayerMPfromName(player.getName());
+		return PlayerUtil.getPlayerMPfromName(player.getCommandSenderName());
 	}
 }

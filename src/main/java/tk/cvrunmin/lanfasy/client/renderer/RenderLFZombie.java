@@ -2,6 +2,7 @@ package tk.cvrunmin.lanfasy.client.renderer;
 
 import java.util.List;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.model.ModelZombieVillager;
@@ -33,9 +34,9 @@ public class RenderLFZombie extends RenderBiped
     private final List field_177121_n;
     private final List field_177122_o;
 
-    public RenderLFZombie(RenderManager p_i46127_1_)
+    public RenderLFZombie()
     {
-        super(p_i46127_1_, new ModelLFZombie(), 0.5F, 1.0F);
+        super(Minecraft.getMinecraft().getRenderManager(), new ModelLFZombie(), 0.5F, 1.0F);
         LayerRenderer layerrenderer = (LayerRenderer)this.layerRenderers.get(0);
         this.field_82434_o = this.modelBipedMain;
         this.addLayer(new LayerHeldItem(this));

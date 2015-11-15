@@ -85,7 +85,7 @@ public class GuiLFButton extends GuiButton{
             p_146112_1_.getTextureManager().bindTexture(buttonTextures);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             this.field_146123_n = p_146112_2_ >= this.xPosition && p_146112_3_ >= this.yPosition && p_146112_2_ < this.xPosition + this.width && p_146112_3_ < this.yPosition + this.height;
-            int k = super.getHoverState(this.field_146123_n);
+            int k = this.getHoverState(this.field_146123_n);
             GL11.glEnable(GL11.GL_BLEND);
             OpenGlHelper.glBlendFunc(770, 771, 1, 0);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -102,11 +102,10 @@ public class GuiLFButton extends GuiButton{
             {
                 l = 10526880;
             }
-            else if (this.field_146123_n)
+            else if (this.hovered)
             {
                 l = 16777120;
             }
-
             this.drawCenteredString(fontrenderer, this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, l);
         }
     }
@@ -115,14 +114,12 @@ public class GuiLFButton extends GuiButton{
      * Fired when the mouse button is dragged. Equivalent of MouseListener.mouseDragged(MouseEvent e).
      */
     protected void mouseDragged(Minecraft p_146119_1_, int p_146119_2_, int p_146119_3_) {
-    	super.mouseDragged(p_146119_1_, p_146119_2_, p_146119_3_);
     }
 
     /**
      * Fired when the mouse button is released. Equivalent of MouseListener.mouseReleased(MouseEvent e).
      */
     public void mouseReleased(int p_146118_1_, int p_146118_2_) {
-    	super.mouseReleased(p_146118_1_, p_146118_2_);
     }
 
     /**
@@ -131,8 +128,7 @@ public class GuiLFButton extends GuiButton{
      */
     public boolean mousePressed(Minecraft p_146116_1_, int p_146116_2_, int p_146116_3_)
     {
-    	return super.mousePressed(p_146116_1_, p_146116_2_, p_146116_3_);
-//        return this.enabled && this.visible && p_146116_2_ >= this.xPosition && p_146116_3_ >= this.yPosition && p_146116_2_ < this.xPosition + this.width && p_146116_3_ < this.yPosition + this.height;
+        return this.enabled && this.visible && p_146116_2_ >= this.xPosition && p_146116_3_ >= this.yPosition && p_146116_2_ < this.xPosition + this.width && p_146116_3_ < this.yPosition + this.height;
     }
     public boolean func_146115_a()
     {

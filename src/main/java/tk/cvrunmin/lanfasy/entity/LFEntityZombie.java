@@ -64,19 +64,12 @@ public class LFEntityZombie extends EntityMob{
 	public static int mobid = 1010;
 	public Object instance;
 	int entityID = mobid;
-	public void preInit(FMLPreInitializationEvent event){
-		EntityRegistry.registerGlobalEntityID(LFEntityZombie.class, "Zombie(ML)", entityID);
-		EntityRegistry.registerModEntity(LFEntityZombie.class, "Zombie(ML)", entityID, instance, 64, 1, true);
-		EntityList.entityEggs.put(Integer.valueOf(entityID), new EntityList.EntityEggInfo(entityID,  44975, 7969893));        
-	}
-	public void load() {
-	}
 	public LFEntityZombie(World par1World) {
 		super(par1World);
-        ((PathNavigateGround)this.getNavigator()).func_179688_b(true);
+        ((PathNavigateGround)this.getNavigator()).setBreakDoors(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
-        this.tasks.addTask(2, this.field_175455_a);
+        this.tasks.addTask(2, this.aiAvoidExplodingCreepers);
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -125,7 +118,7 @@ public class LFEntityZombie extends EntityMob{
         return this.field_146076_bu;
     }
 
-    public void func_146070_a(boolean p_146070_1_)
+    public void setBreakDoorsAItask(boolean p_146070_1_)
     {
         if (this.field_146076_bu != p_146070_1_)
         {
@@ -301,9 +294,9 @@ public class LFEntityZombie extends EntityMob{
                 this.dropItem(Items.potato, 1);
         }
     }
-    protected void func_180481_a(DifficultyInstance p_180481_1_)
+    protected void setEquipmentBasedOnDifficulty(DifficultyInstance p_180481_1_)
     {
-        super.func_180481_a(p_180481_1_);
+        super.setEquipmentBasedOnDifficulty(p_180481_1_);
 
         if (this.rand.nextFloat() < (this.worldObj.getDifficulty() == EnumDifficulty.HARD ? 0.05F : 0.01F))
         {
@@ -356,7 +349,7 @@ public class LFEntityZombie extends EntityMob{
             this.startConversion(tagCompund.getInteger("ConversionTime"));
         }
 
-        this.func_146070_a(tagCompund.getBoolean("CanBreakDoors"));
+        this.setBreakDoorsAItask(tagCompund.getBoolean("CanBreakDoors"));
     }
     public void onKillEntity(EntityLivingBase entityLivingIn)
     {
@@ -372,7 +365,7 @@ public class LFEntityZombie extends EntityMob{
             LFEntityZombie entityzombie = new LFEntityZombie(this.worldObj);
             entityzombie.copyLocationAndAnglesFrom(entityLivingIn);
             this.worldObj.removeEntity(entityLivingIn);
-            entityzombie.func_180482_a(this.worldObj.getDifficultyForLocation(new BlockPos(entityzombie)), (IEntityLivingData)null);
+            entityzombie.onInitialSpawn(this.worldObj.getDifficultyForLocation(new BlockPos(entityzombie)), (IEntityLivingData)null);
             entityzombie.setVillager(true);
 
             if (entityLivingIn.isChild())
@@ -400,9 +393,9 @@ public class LFEntityZombie extends EntityMob{
     {
         return p_175448_1_.getItem() == Items.egg && this.isChild() && this.isRiding() ? false : super.func_175448_a(p_175448_1_);
     }
-    public IEntityLivingData func_180482_a(DifficultyInstance p_180482_1_, IEntityLivingData p_180482_2_)
+    public IEntityLivingData onInitialSpawn(DifficultyInstance p_180482_1_, IEntityLivingData p_180482_2_)
     {
-        Object p_180482_2_1 = super.func_180482_a(p_180482_1_, p_180482_2_);
+        Object p_180482_2_1 = super.onInitialSpawn(p_180482_1_, p_180482_2_);
         float f = p_180482_1_.getClampedAdditionalDifficulty();
         this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * f);
 
@@ -439,7 +432,7 @@ public class LFEntityZombie extends EntityMob{
                 {
                     EntityChicken entitychicken1 = new EntityChicken(this.worldObj);
                     entitychicken1.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
-                    entitychicken1.func_180482_a(p_180482_1_, (IEntityLivingData)null);
+                    entitychicken1.onInitialSpawn(p_180482_1_, (IEntityLivingData)null);
                     entitychicken1.setChickenJockey(true);
                     this.worldObj.spawnEntityInWorld(entitychicken1);
                     this.mountEntity(entitychicken1);
@@ -447,9 +440,9 @@ public class LFEntityZombie extends EntityMob{
             }
         }
 
-        this.func_146070_a(this.rand.nextFloat() < f * 0.1F);
-        this.func_180481_a(p_180482_1_);
-        this.func_180483_b(p_180482_1_);
+        this.setBreakDoorsAItask(this.rand.nextFloat() < f * 0.1F);
+        this.setEquipmentBasedOnDifficulty(p_180482_1_);
+        this.setEnchantmentBasedOnDifficulty(p_180482_1_);
 
         if (this.getEquipmentInSlot(4) == null)
         {
@@ -474,7 +467,7 @@ public class LFEntityZombie extends EntityMob{
         {
             this.getEntityAttribute(reinforcementChance).applyModifier(new AttributeModifier("Leader zombie bonus", this.rand.nextDouble() * 0.25D + 0.5D, 0));
             this.getEntityAttribute(SharedMonsterAttributes.maxHealth).applyModifier(new AttributeModifier("Leader zombie bonus", this.rand.nextDouble() * 3.0D + 1.0D, 2));
-            this.func_146070_a(true);
+            this.setBreakDoorsAItask(true);
         }
 
         return (IEntityLivingData)p_180482_2_1;
@@ -542,7 +535,7 @@ public class LFEntityZombie extends EntityMob{
     {
         EntityVillager entityvillager = new EntityVillager(this.worldObj);
         entityvillager.copyLocationAndAnglesFrom(this);
-        entityvillager.func_180482_a(this.worldObj.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null);
+        entityvillager.onInitialSpawn(this.worldObj.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null);
         entityvillager.setLookingForHome();
 
         if (this.isChild())

@@ -2,6 +2,7 @@ package tk.cvrunmin.lanfasy.client.renderer;
 
 import java.util.Random;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
@@ -15,9 +16,9 @@ import tk.cvrunmin.lanfasy.entity.effect.EntityLightBolt;
 
 public class RenderLightBolt extends RenderLightningBolt {
 
-    public RenderLightBolt(RenderManager p_i46157_1_)
+    public RenderLightBolt()
     {
-        super(p_i46157_1_);
+        super(Minecraft.getMinecraft().getRenderManager());
     }
 
     public void doRender(EntityLightBolt entity, double x, double y, double z, float p_76986_8_, float partialTicks)

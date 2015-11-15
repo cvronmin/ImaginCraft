@@ -34,20 +34,12 @@ public class LFEntitySpider extends EntityMob{
 	public Object instance;
 	public static int mobid = 1013;
 	int entityID = mobid;
-	@SuppressWarnings("unchecked")
-	public void preInit(FMLPreInitializationEvent event){
-		EntityRegistry.registerGlobalEntityID(LFEntitySpider.class, "Spider(ML)", entityID);
-		EntityRegistry.registerModEntity(LFEntitySpider.class, "Spider(ML)", entityID, instance, 64, 1, true);
-		EntityList.entityEggs.put(Integer.valueOf(entityID), new EntityList.EntityEggInfo(entityID,  3419431, 11013646));        
-	}
-	public void load() {
-	
-	}
+
 	public LFEntitySpider(World par1World) {
 		super(par1World);
         this.setSize(1.4F, 0.9F);
         this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(2, this.field_175455_a);
+        this.tasks.addTask(2, this.aiAvoidExplodingCreepers);
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
         this.tasks.addTask(4, new LFEntitySpider.AISpiderAttack(EntityPlayer.class));
         this.tasks.addTask(4, new LFEntitySpider.AISpiderAttack(EntityIronGolem.class));
@@ -141,15 +133,15 @@ public class LFEntitySpider extends EntityMob{
         this.dataWatcher.updateObject(16, Byte.valueOf(b0));
     }
 
-    public IEntityLivingData func_180482_a(DifficultyInstance p_180482_1_, IEntityLivingData p_180482_2_)
+    public IEntityLivingData onInitialSpawn(DifficultyInstance p_180482_1_, IEntityLivingData p_180482_2_)
     {
-        Object p_180482_2_1 = super.func_180482_a(p_180482_1_, p_180482_2_);
+        Object p_180482_2_1 = super.onInitialSpawn(p_180482_1_, p_180482_2_);
 
         if (this.worldObj.rand.nextInt(100) == 0)
         {
             LFEntitySkeleton entityskeleton = new LFEntitySkeleton(this.worldObj);
             entityskeleton.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
-            entityskeleton.func_180482_a(p_180482_1_, (IEntityLivingData)null);
+            entityskeleton.onInitialSpawn(p_180482_1_, (IEntityLivingData)null);
             this.worldObj.spawnEntityInWorld(entityskeleton);
             entityskeleton.mountEntity(this);
         }

@@ -1,5 +1,6 @@
 package tk.cvrunmin.lanfasy.client.renderer;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
@@ -18,9 +19,9 @@ public class RenderLFPigZombie extends RenderBiped
 {
     private static final ResourceLocation field_177120_j = new ResourceLocation(Lanfasy.MODID, "textures/entity/zombie_pigman.png");
 
-    public RenderLFPigZombie(RenderManager p_i46148_1_)
+    public RenderLFPigZombie()
     {
-        super(p_i46148_1_, new ModelLFZombie(), 0.5F, 1.0F);
+        super(Minecraft.getMinecraft().getRenderManager(), new ModelLFZombie(), 0.5F, 1.0F);
         this.addLayer(new LayerHeldItem(this));
         this.addLayer(new LayerBipedArmor(this)
         {

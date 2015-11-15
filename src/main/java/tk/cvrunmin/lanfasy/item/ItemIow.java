@@ -4,21 +4,19 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
-import tk.cvrunmin.lanfasy.entity.projectile.EntityFireArrow;
+import tk.cvrunmin.fansy.api.item.FItem;
 import tk.cvrunmin.lanfasy.entity.projectile.EntityIrrow;
 import tk.cvrunmin.lanfasy.entity.projectile.EntitySafeIrrow;
 import tk.cvrunmin.lanfasy.init.LFItems;
 import tk.cvrunmin.lanfasy.util.LFConfig;
 
-public class ItemIow extends LFItem{
+public class ItemIow extends FItem{
     public static final String[] bowPullIconNameArray = new String[] {"pulling_0", "pulling_1", "pulling_2"};
 
     public ItemIow()

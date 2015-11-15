@@ -334,9 +334,9 @@ public class LFEntityGhast extends EntityFlying implements IMob
             }
             else
             {
-                double d0 = entitymovehelper.func_179917_d() - this.field_179454_a.posX;
-                double d1 = entitymovehelper.func_179919_e() - this.field_179454_a.posY;
-                double d2 = entitymovehelper.func_179918_f() - this.field_179454_a.posZ;
+                double d0 = entitymovehelper.getX() - this.field_179454_a.posX;
+                double d1 = entitymovehelper.getY() - this.field_179454_a.posY;
+                double d2 = entitymovehelper.getZ() - this.field_179454_a.posZ;
                 double d3 = d0 * d0 + d1 * d1 + d2 * d2;
                 return d3 < 1.0D || d3 > 3600.0D;
             }

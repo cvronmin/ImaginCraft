@@ -4,10 +4,13 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import tk.cvrunmin.lanfasy.client.model.ModelLFCreeper;
 import tk.cvrunmin.lanfasy.client.renderer.RenderLFCreeper;
 import tk.cvrunmin.lanfasy.entity.LFEntityCreeper;
 
+@SideOnly(Side.CLIENT)
 public class LayerLFCreeperCharge implements LayerRenderer{
     private static final ResourceLocation LIGHTNING_TEXTURE = new ResourceLocation("lanfasy", "textures/entity/creeper/creeper_armor.png");
     private final RenderLFCreeper creeperRenderer;

@@ -1,31 +1,26 @@
 package tk.cvrunmin.lanfasy;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemSpade;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-import tk.cvrunmin.lanfasy.block.BlockLFFluid;
+import tk.cvrunmin.lanfasy.client.gui.GuiCHWOverlay;
 import tk.cvrunmin.lanfasy.client.gui.LFGuiHandler;
-import tk.cvrunmin.lanfasy.client.renderer.LFRendererEntity;
+import tk.cvrunmin.lanfasy.command.CommandDIMTeleport;
+import tk.cvrunmin.lanfasy.command.CommandSpeed;
 import tk.cvrunmin.lanfasy.entity.LFEntityCreeper;
 import tk.cvrunmin.lanfasy.entity.LFEntityCreeperBoss;
 import tk.cvrunmin.lanfasy.entity.LFEntityEnderman;
@@ -37,13 +32,19 @@ import tk.cvrunmin.lanfasy.entity.LFEntitySlimeBoss;
 import tk.cvrunmin.lanfasy.entity.LFEntitySpider;
 import tk.cvrunmin.lanfasy.entity.LFEntityZombie;
 import tk.cvrunmin.lanfasy.entity.LFEntityZombieBoss;
+import tk.cvrunmin.lanfasy.entity.item.EntityGreenstal;
+import tk.cvrunmin.lanfasy.entity.item.EntityRedstal;
 import tk.cvrunmin.lanfasy.entity.projectile.EntityFireArrow;
+import tk.cvrunmin.lanfasy.entity.projectile.EntityInoArrow;
 import tk.cvrunmin.lanfasy.entity.projectile.EntityIrrow;
 import tk.cvrunmin.lanfasy.entity.projectile.EntitySafeIrrow;
 import tk.cvrunmin.lanfasy.init.LFBlocks;
 import tk.cvrunmin.lanfasy.init.LFItems;
-import tk.cvrunmin.lanfasy.item.ItemLFBucket;
+import tk.cvrunmin.lanfasy.tileentity.TileEntityAFPortal;
+import tk.cvrunmin.lanfasy.tileentity.TileEntityRepairFurnace;
 import tk.cvrunmin.lanfasy.util.LFConfig;
+import tk.cvrunmin.lanfasy.world.WorldProviderAltifect;
+import tk.cvrunmin.lanfasy.world.WorldProviderCrashHell;
 import tk.cvrunmin.lanfasy.world.WorldProviderLF;
 import tk.cvrunmin.lanfasy.world.gen.LFWorldGenMinable;
 
@@ -57,6 +58,7 @@ public class Lanfasy {
     public static LFCommonProxy proxy;
     public static Side side;
 	public static final EventListenerLF eventListener = new EventListenerLF();
+	public static final GuiCHWOverlay overlaychw = new GuiCHWOverlay(FMLClientHandler.instance().getClient());
 	public static final LFConfig config = new LFConfig();
     @Instance("lanfasy")
     public static Lanfasy instance;
@@ -66,6 +68,11 @@ public class Lanfasy {
     public static Fluid fluidlava;
     public static Item lfwaterbucket;
     public static Item lflavabucket;
+    public static LFTabs tab = new LFTabs();
+    @Mod.EventHandler
+    public void serverLoad(FMLServerStartingEvent event) {
+		event.registerServerCommand(new CommandDIMTeleport());
+    }
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         side = event.getSide();
@@ -113,39 +120,72 @@ public class Lanfasy {
             LFItems.initItems();
 //    		GameRegistry.registerItem(lfwaterbucket, "lfwater_bucket");
 //    		GameRegistry.registerItem(lflavabucket, "lflava_bucket");
-            this.registerEntity();
-    		EntityList.entityEggs.remove(120);
+            this.registerEntitys();
+//    		EntityList.entityEggs.remove(120);
         }
     @Mod.EventHandler
     public void init(FMLInitializationEvent event){
     	GameRegistry.registerWorldGenerator(new LFWorldGenMinable(), 5);
 		MinecraftForge.EVENT_BUS.register(eventListener);
 		FMLCommonHandler.instance().bus().register(eventListener);
+		MinecraftForge.EVENT_BUS.register(overlaychw);
+		TickEventsLFServer tickserver = new TickEventsLFServer();
+		MinecraftForge.EVENT_BUS.register(tickserver);
+		FMLCommonHandler.instance().bus().register(tickserver);
 		FMLCommonHandler.instance().bus().register(config);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new LFGuiHandler());
-        if(side.isClient()){
+/*        if(side.isClient()){
         proxy.registerBlockRenderers();
         proxy.registerItemRenderers();
         proxy.registerRenderers(this);
-        }
+        }*/
+        proxy.init(event);
 	    DimensionManager.registerProviderType(1010, WorldProviderLF.class, true);
 	    DimensionManager.registerDimension(1010, 1010);
+	    DimensionManager.registerProviderType(-1011, WorldProviderCrashHell.class, true);
+	    DimensionManager.registerDimension(-1011, -1011);
+	    DimensionManager.registerProviderType(512, WorldProviderAltifect.class, false);
+	    DimensionManager.registerDimension(512, 512);
     }
-    public void registerEntity(){
-    	registerEntity(LFEntityZombie.class, "LFZombie", 1010, 44975, 7969893);
-    	registerEntity(LFEntityCreeper.class, "LFCreeper", 1011 , 894731, 0);
-    	registerEntity(LFEntitySkeleton.class, "LFSkeleton", 1012, 12698049, 4802889);
-    	registerEntity(LFEntitySpider.class, "LFSpider", 1013, 3419431, 11013646);
-    	registerEntity(LFEntitySlime.class, "LFSlime", 1014, 5349438, 8306542);
-    	registerEntity(LFEntityGhast.class, "LFGhast", 1015, 16382457, 12369084);
-    	registerEntity(LFEntityPigZombie.class, "LFZombiePigman", 1016, 15373203, 5009705);
-    	registerEntity(LFEntityEnderman.class, "LFEnderman", 1017, 1447446, 0);
-    	registerEntity(LFEntitySlimeBoss.class, "SlimeBoss", 1516, 534943, 830654);
-    	registerEntity(LFEntityCreeperBoss.class, "CreeperBoss", 1517, 14155115,2557451);
-    	registerEntity(LFEntityZombieBoss.class, "ZombieBoss", 1518, 35165813,6456132);
-    	registerEntity(EntityFireArrow.class, "FireArrow", 1024);
-    	registerEntity(EntityIrrow.class, "Irrow", 1025);
-    	registerEntity(EntitySafeIrrow.class, "Irrow_safe", 1026);
+    public void registerEntitys(){
+    	int i = EntityRegistry.findGlobalUniqueEntityId();
+    	registerEntity(LFEntityZombie.class, "LFZombie", i, 44975, 7969893);
+    	i = EntityRegistry.findGlobalUniqueEntityId();
+    	registerEntity(LFEntityCreeper.class, "LFCreeper", i , 894731, 0);
+    	i = EntityRegistry.findGlobalUniqueEntityId();
+    	registerEntity(LFEntitySkeleton.class, "LFSkeleton", i, 12698049, 4802889);
+    	i = EntityRegistry.findGlobalUniqueEntityId();
+    	registerEntity(LFEntitySpider.class, "LFSpider", i, 3419431, 11013646);
+    	i = EntityRegistry.findGlobalUniqueEntityId();
+    	registerEntity(LFEntitySlime.class, "LFSlime", i, 5349438, 8306542);
+    	i = EntityRegistry.findGlobalUniqueEntityId();
+    	registerEntity(LFEntityGhast.class, "LFGhast", i, 16382457, 12369084);
+    	i = EntityRegistry.findGlobalUniqueEntityId();
+    	registerEntity(LFEntityPigZombie.class, "LFZombiePigman", i, 15373203, 5009705);
+    	i = EntityRegistry.findGlobalUniqueEntityId();
+    	registerEntity(LFEntityEnderman.class, "LFEnderman", i, 1447446, 0);
+    	i = EntityRegistry.findGlobalUniqueEntityId();
+    	registerEntity(LFEntitySlimeBoss.class, "SlimeBoss", i, 534943, 830654);
+    	i = EntityRegistry.findGlobalUniqueEntityId();
+    	registerEntity(LFEntityCreeperBoss.class, "CreeperBoss", i, 14155115,2557451);
+    	i = EntityRegistry.findGlobalUniqueEntityId();
+    	registerEntity(LFEntityZombieBoss.class, "ZombieBoss", i, 35165813,6456132);
+    	i = EntityRegistry.findGlobalUniqueEntityId();
+    	registerEntity(EntityFireArrow.class, "FireArrow", i);
+    	i = EntityRegistry.findGlobalUniqueEntityId();
+    	registerEntity(EntityIrrow.class, "Irrow", i);
+    	i = EntityRegistry.findGlobalUniqueEntityId();
+    	registerEntity(EntitySafeIrrow.class, "Irrow_safe", i);
+    	i = EntityRegistry.findGlobalUniqueEntityId();
+    	registerEntity(EntityInoArrow.Fire.class, "FirePray", i);
+    	i = EntityRegistry.findGlobalUniqueEntityId();
+    	registerEntity(EntityInoArrow.TP.class, "TPPray", i);
+    	i = EntityRegistry.findGlobalUniqueEntityId();
+    	registerEntity(EntityRedstal.class, "Redstal", i);
+    	i = EntityRegistry.findGlobalUniqueEntityId();
+    	registerEntity(EntityGreenstal.class, "Greenstal", i);
+        GameRegistry.registerTileEntity(TileEntityRepairFurnace.class, "TileEntityReFur");
+        GameRegistry.registerTileEntity(TileEntityAFPortal.class, "TileEntityAFPortal");
     }
     public void registerEntity(Class<? extends Entity> entityClass, String registerName, int id){
 		EntityRegistry.registerGlobalEntityID(entityClass, registerName, id);

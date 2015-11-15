@@ -1,5 +1,6 @@
 package tk.cvrunmin.lanfasy.world;
 
+import tk.cvrunmin.lanfasy.client.renderer.SkyRenderFTW;
 import tk.cvrunmin.lanfasy.world.biome.LFBiomeBase;
 import tk.cvrunmin.lanfasy.world.gen.ChunkProviderLF;
 import net.minecraft.util.MathHelper;
@@ -35,7 +36,7 @@ public class WorldProviderLF extends WorldProvider {
         return new Vec3((double)f3, (double)f4, (double)f5);
     }
     public IChunkProvider createChunkGenerator(){
-        return new ChunkProviderGenerate(this.worldObj, getSeed(), true, "");
+        return new ChunkProviderLF(this.worldObj, getSeed(), true);
     }
 
     public boolean isSurfaceWorld(){
@@ -52,7 +53,7 @@ public class WorldProviderLF extends WorldProvider {
 
     @SideOnly(Side.CLIENT)
     public boolean doesXZShowFog(int par1, int par2){
-        return true;
+        return false;
     }
 
     public String getDimensionName(){
@@ -70,7 +71,26 @@ public class WorldProviderLF extends WorldProvider {
             this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
         }
     }
+    public float calculateCelestialAngle(long p_76563_1_, float p_76563_3_)
+    {
+        int j = (int)(p_76563_1_ % 24000L);
+        float f1 = ((float)j + p_76563_3_) / 24000.0F - 0.25F;
 
+        if (f1 < 0.0F)
+        {
+            ++f1;
+        }
+
+        if (f1 > 1.0F)
+        {
+            --f1;
+        }
+
+        float f2 = f1;
+        f1 = 1.0F - (float)((Math.cos((double)f1 * Math.PI) + 1.0D) / 2.0D);
+        f1 = f2 + (f1 - f2) / 3.0F;
+        return f1;
+    }
 	@Override
 	public String getInternalNameSuffix() {
 		return "_lfdim";
@@ -78,6 +98,6 @@ public class WorldProviderLF extends WorldProvider {
     @SideOnly(Side.CLIENT)
     public boolean isSkyColored()
     {
-        return false;
+        return true;
     }
 }

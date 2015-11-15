@@ -1,5 +1,6 @@
 package tk.cvrunmin.lanfasy.client.renderer;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -20,9 +21,9 @@ public class RenderLFSkeleton extends RenderBiped
 {
     private static final ResourceLocation skeletonTextures = new ResourceLocation(Lanfasy.MODID, "textures/entity/skeleton/skeleton.png");
     private static final ResourceLocation witherSkeletonTextures = new ResourceLocation(Lanfasy.MODID, "textures/entity/skeleton/wither_skeleton.png");
-    public RenderLFSkeleton(RenderManager renderManager)
+    public RenderLFSkeleton()
     {
-        super(renderManager, new ModelLFSkeleton(), 0.5F);
+        super(Minecraft.getMinecraft().getRenderManager(), new ModelLFSkeleton(), 0.5F);
         this.addLayer(new LayerHeldItem(this));
         this.addLayer(new LayerBipedArmor(this)
         {

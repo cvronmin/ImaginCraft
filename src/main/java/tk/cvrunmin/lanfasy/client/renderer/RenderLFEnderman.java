@@ -3,6 +3,7 @@ package tk.cvrunmin.lanfasy.client.renderer;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -25,9 +26,9 @@ public class RenderLFEnderman extends RenderLiving
     private ModelLFEnderman endermanModel;
     private Random rnd = new Random();
 
-    public RenderLFEnderman(RenderManager renderManager)
+    public RenderLFEnderman()
     {
-        super(renderManager, new ModelLFEnderman(0.0F), 0.5F);
+        super(Minecraft.getMinecraft().getRenderManager(), new ModelLFEnderman(0.0F), 0.5F);
         this.endermanModel = (ModelLFEnderman)super.mainModel;
         this.addLayer(new LayerLFEndermanEyes(this));
         this.addLayer(new LayerLFHeldBlock(this));

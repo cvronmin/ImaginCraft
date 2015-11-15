@@ -1,5 +1,6 @@
 package tk.cvrunmin.lanfasy.client.renderer;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -17,9 +18,9 @@ public class RenderLFSpider extends RenderLiving
 {
     private static final ResourceLocation spiderTextures = new ResourceLocation(Lanfasy.MODID, "textures/entity/spider/spider.png");
 
-    public RenderLFSpider(RenderManager p_i46139_1_)
+    public RenderLFSpider()
     {
-        super(p_i46139_1_, new ModelLFSpider(), 1.0F);
+        super(Minecraft.getMinecraft().getRenderManager(), new ModelLFSpider(), 1.0F);
         this.addLayer(new LayerLFSpiderEyes(this));
     }
 

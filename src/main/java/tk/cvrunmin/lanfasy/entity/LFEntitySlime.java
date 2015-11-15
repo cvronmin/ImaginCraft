@@ -163,7 +163,7 @@ public class LFEntitySlime extends EntityLiving implements IMob{
     {
         return new LFEntitySlime(this.worldObj);
     }
-    public void func_145781_i(int p_145781_1_)
+    public void onDataWatcherUpdate(int p_145781_1_)
     {
         if (p_145781_1_ == 16)
         {
@@ -178,7 +178,7 @@ public class LFEntitySlime extends EntityLiving implements IMob{
             }
         }
 
-        super.func_145781_i(p_145781_1_);
+        super.onDataWatcherUpdate(p_145781_1_);
     }
     public void setDead()
     {
@@ -236,7 +236,7 @@ public class LFEntitySlime extends EntityLiving implements IMob{
         if (this.canEntityBeSeen(p_175451_1_) && this.getDistanceSqToEntity(p_175451_1_) < 0.6D * (double)i * 0.6D * (double)i && p_175451_1_.attackEntityFrom(DamageSource.causeMobDamage(this), (float)this.getAttackStrength()))
         {
             this.playSound("mob.attack", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            this.func_174815_a(this, p_175451_1_);
+            this.applyEnchantments(this, p_175451_1_);
         }
     }
     public float getEyeHeight()
@@ -318,7 +318,7 @@ public class LFEntitySlime extends EntityLiving implements IMob{
         this.motionY = 0.41999998688697815D;
         this.isAirBorne = true;
     }
-    public IEntityLivingData func_180482_a(DifficultyInstance p_180482_1_, IEntityLivingData p_180482_2_)
+    public IEntityLivingData onInitialSpawn(DifficultyInstance p_180482_1_, IEntityLivingData p_180482_2_)
     {
         int i = this.rand.nextInt(3);
 
@@ -329,7 +329,7 @@ public class LFEntitySlime extends EntityLiving implements IMob{
 
         int j = 1 << i;
         this.setSlimeSize(j);
-        return super.func_180482_a(p_180482_1_, p_180482_2_);
+        return super.onInitialSpawn(p_180482_1_, p_180482_2_);
     }
     class AISlimeAttack extends EntityAIBase
     {
@@ -397,12 +397,11 @@ public class LFEntitySlime extends EntityLiving implements IMob{
     class AISlimeFloat extends EntityAIBase
     {
         private LFEntitySlime field_179457_a = LFEntitySlime.this;
-        private static final String __OBFID = "CL_00002201";
 
         public AISlimeFloat()
         {
             this.setMutexBits(5);
-            ((PathNavigateGround)LFEntitySlime.this.getNavigator()).func_179693_d(true);
+            ((PathNavigateGround)LFEntitySlime.this.getNavigator()).setCanSwim(true);
         }
 
         public boolean shouldExecute()
@@ -424,8 +423,6 @@ public class LFEntitySlime extends EntityLiving implements IMob{
     class AISlimeHop extends EntityAIBase
     {
         private LFEntitySlime field_179458_a = LFEntitySlime.this;
-        private static final String __OBFID = "CL_00002200";
-
         public AISlimeHop()
         {
             this.setMutexBits(5);
