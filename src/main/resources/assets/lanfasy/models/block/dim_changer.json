@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "side": "lanfasy:blocks/dc_side",
+        "end":  "lanfasy:blocks/dc_top"
+    }
+}

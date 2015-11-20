@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
+import tk.cvrunmin.lanfasy.client.gui.GuiBossBarOverlay;
 import tk.cvrunmin.lanfasy.client.gui.GuiCHWOverlay;
 import tk.cvrunmin.lanfasy.client.gui.LFGuiHandler;
 import tk.cvrunmin.lanfasy.command.CommandDIMTeleport;
@@ -32,6 +33,7 @@ import tk.cvrunmin.lanfasy.entity.LFEntitySlimeBoss;
 import tk.cvrunmin.lanfasy.entity.LFEntitySpider;
 import tk.cvrunmin.lanfasy.entity.LFEntityZombie;
 import tk.cvrunmin.lanfasy.entity.LFEntityZombieBoss;
+import tk.cvrunmin.lanfasy.entity.cy.EntityHymnson;
 import tk.cvrunmin.lanfasy.entity.item.EntityGreenstal;
 import tk.cvrunmin.lanfasy.entity.item.EntityRedstal;
 import tk.cvrunmin.lanfasy.entity.projectile.EntityFireArrow;
@@ -59,6 +61,7 @@ public class Lanfasy {
     public static Side side;
 	public static final EventListenerLF eventListener = new EventListenerLF();
 	public static final GuiCHWOverlay overlaychw = new GuiCHWOverlay(FMLClientHandler.instance().getClient());
+	public static final GuiBossBarOverlay cybossBar = new GuiBossBarOverlay(FMLClientHandler.instance().getClient());
 	public static final LFConfig config = new LFConfig();
     @Instance("lanfasy")
     public static Lanfasy instance;
@@ -129,6 +132,7 @@ public class Lanfasy {
 		MinecraftForge.EVENT_BUS.register(eventListener);
 		FMLCommonHandler.instance().bus().register(eventListener);
 		MinecraftForge.EVENT_BUS.register(overlaychw);
+		MinecraftForge.EVENT_BUS.register(cybossBar);
 		TickEventsLFServer tickserver = new TickEventsLFServer();
 		MinecraftForge.EVENT_BUS.register(tickserver);
 		FMLCommonHandler.instance().bus().register(tickserver);
@@ -142,8 +146,8 @@ public class Lanfasy {
         proxy.init(event);
 	    DimensionManager.registerProviderType(1010, WorldProviderLF.class, true);
 	    DimensionManager.registerDimension(1010, 1010);
-	    DimensionManager.registerProviderType(-1011, WorldProviderCrashHell.class, true);
-	    DimensionManager.registerDimension(-1011, -1011);
+//	    DimensionManager.registerProviderType(-1011, WorldProviderCrashHell.class, true);
+//	    DimensionManager.registerDimension(-1011, -1011);
 	    DimensionManager.registerProviderType(512, WorldProviderAltifect.class, false);
 	    DimensionManager.registerDimension(512, 512);
     }
@@ -184,6 +188,8 @@ public class Lanfasy {
     	registerEntity(EntityRedstal.class, "Redstal", i);
     	i = EntityRegistry.findGlobalUniqueEntityId();
     	registerEntity(EntityGreenstal.class, "Greenstal", i);
+    	i = EntityRegistry.findGlobalUniqueEntityId();
+    	registerEntity(EntityHymnson.class, "Prayer", i, 0xFC1296, 0xAC2046);
         GameRegistry.registerTileEntity(TileEntityRepairFurnace.class, "TileEntityReFur");
         GameRegistry.registerTileEntity(TileEntityAFPortal.class, "TileEntityAFPortal");
     }

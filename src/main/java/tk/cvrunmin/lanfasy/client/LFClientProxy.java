@@ -27,6 +27,7 @@ import tk.cvrunmin.lanfasy.client.renderer.RenderSlimeBoss;
 import tk.cvrunmin.lanfasy.client.renderer.RenderZombieBoss;
 import tk.cvrunmin.lanfasy.client.renderer.crystal.RenderGreenstal;
 import tk.cvrunmin.lanfasy.client.renderer.crystal.RenderRedstal;
+import tk.cvrunmin.lanfasy.client.renderer.cy.RenderHymnson;
 import tk.cvrunmin.lanfasy.entity.LFEntityCreeper;
 import tk.cvrunmin.lanfasy.entity.LFEntityCreeperBoss;
 import tk.cvrunmin.lanfasy.entity.LFEntityEnderman;
@@ -38,6 +39,7 @@ import tk.cvrunmin.lanfasy.entity.LFEntitySlimeBoss;
 import tk.cvrunmin.lanfasy.entity.LFEntitySpider;
 import tk.cvrunmin.lanfasy.entity.LFEntityZombie;
 import tk.cvrunmin.lanfasy.entity.LFEntityZombieBoss;
+import tk.cvrunmin.lanfasy.entity.cy.EntityHymnson;
 import tk.cvrunmin.lanfasy.entity.effect.EntityLightBolt;
 import tk.cvrunmin.lanfasy.entity.item.EntityGreenstal;
 import tk.cvrunmin.lanfasy.entity.item.EntityRedstal;
@@ -82,6 +84,7 @@ public class LFClientProxy extends LFCommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(EntityGreenstal.class, new RenderGreenstal());
 		RenderingRegistry.registerEntityRenderingHandler(EntityInoArrow.Fire.class, new RenderInoArrow.Fire());
 		RenderingRegistry.registerEntityRenderingHandler(EntityInoArrow.TP.class, new RenderInoArrow.TP());
+		RenderingRegistry.registerEntityRenderingHandler(EntityHymnson.class, new RenderHymnson());
 	}
 	public void registerBlockRenderers(){
 		this.blockRend(LFBlocks.dremic);

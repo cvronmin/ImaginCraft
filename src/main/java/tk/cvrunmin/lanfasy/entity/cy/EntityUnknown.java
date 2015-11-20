@@ -26,22 +26,4 @@ public class EntityUnknown extends EntityMob {
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[0]));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
-    class GroupData implements IEntityLivingData
-    {
-        public boolean field_142048_a;
-        public boolean field_142046_b;
-
-        private GroupData(boolean par2, boolean par3)
-        {
-            this.field_142048_a = false;
-            this.field_142046_b = false;
-            this.field_142048_a = par2;
-            this.field_142046_b = par3;
-        }
-
-        GroupData(boolean par2, boolean par3, Object par4EntityINNER1)
-        {
-            this(par2, par3);
-        }
-    }
 }

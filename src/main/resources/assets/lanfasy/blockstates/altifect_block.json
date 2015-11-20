@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "ghost=false": { "model": "lanfasy:altifect_block" },
+        "ghost=true": { "model": "lanfasy:altifect_ghost" }
+    }
+}
