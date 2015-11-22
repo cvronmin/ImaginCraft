@@ -6,10 +6,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import tk.cvrunmin.fansy.api.item.FItem;
 import tk.cvrunmin.lanfasy.init.LFBlocks;
+import tk.cvrunmin.mcme.api.item.MEItem;
 
-public class ItemLFTrigger extends FItem{
+public class ItemLFTrigger extends MEItem{
 	public ItemLFTrigger(){
 		  super();
 		  this.maxStackSize = 1;

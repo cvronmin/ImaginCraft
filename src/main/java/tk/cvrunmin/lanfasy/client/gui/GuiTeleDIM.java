@@ -12,10 +12,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.input.Keyboard;
 
-import tk.cvrunmin.fansy.api.client.gui.FGuiScreen;
+import tk.cvrunmin.mcme.api.client.gui.MEGuiScreen;
 
 @SideOnly(Side.CLIENT)
-public class GuiTeleDIM extends FGuiScreen{
+public class GuiTeleDIM extends MEGuiScreen{
     private GuiScreen menuScreen;
     private GuiTextField textField;
 	public GuiTeleDIM(GuiScreen par1GuiScreen) {

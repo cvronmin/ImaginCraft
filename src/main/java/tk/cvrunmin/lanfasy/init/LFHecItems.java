@@ -1,7 +1,10 @@
 package tk.cvrunmin.lanfasy.init;
 
-import tk.cvrunmin.fansy.api.init.Init;
-import tk.cvrunmin.lanfasy.item.hec.*;
+import tk.cvrunmin.lanfasy.item.hec.ItemCHW;
+import tk.cvrunmin.lanfasy.item.hec.ItemHim2D23;
+import tk.cvrunmin.lanfasy.item.hec.ItemLCK;
+import tk.cvrunmin.lanfasy.item.hec.ItemRyan;
+import tk.cvrunmin.mcme.api.init.Init;
 
 public class LFHecItems extends Init{
 	public static final ItemHim2D23 him2d23 = new ItemHim2D23();

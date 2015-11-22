@@ -7,10 +7,10 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import tk.cvrunmin.fansy.api.client.gui.FGui;
 import tk.cvrunmin.lanfasy.init.LFHecItems;
+import tk.cvrunmin.mcme.api.client.gui.MEGui;
 
-public class GuiCHWOverlay extends FGui{
+public class GuiCHWOverlay extends MEGui{
 	Minecraft mc;
 	public GuiCHWOverlay(Minecraft mc){
 		super();

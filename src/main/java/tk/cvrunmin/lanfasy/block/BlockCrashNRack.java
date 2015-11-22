@@ -4,9 +4,9 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import tk.cvrunmin.fansy.api.block.FBlock;
+import tk.cvrunmin.mcme.api.block.MEBlock;
 
-public class BlockCrashNRack extends FBlock{
+public class BlockCrashNRack extends MEBlock{
     public BlockCrashNRack()
     {
         super(Material.rock);

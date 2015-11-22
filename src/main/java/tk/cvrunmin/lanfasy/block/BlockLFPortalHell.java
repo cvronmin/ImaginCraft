@@ -22,11 +22,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tk.cvrunmin.fansy.api.block.FBlockBreakable;
 import tk.cvrunmin.lanfasy.init.LFBlocks;
 import tk.cvrunmin.lanfasy.world.TeleporterCrashHell;
+import tk.cvrunmin.mcme.api.block.MEBlockBreakable;
 
-public class BlockLFPortalHell extends FBlockBreakable
+public class BlockLFPortalHell extends MEBlockBreakable
 {
     public static final PropertyEnum AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class, new EnumFacing.Axis[] {EnumFacing.Axis.X, EnumFacing.Axis.Z});
     

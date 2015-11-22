@@ -1,9 +1,9 @@
 package tk.cvrunmin.lanfasy.item;
 
 import net.minecraft.creativetab.CreativeTabs;
-import tk.cvrunmin.fansy.api.item.FItem;
+import tk.cvrunmin.mcme.api.item.MEItem;
 
-public class ItemDremicIngot extends FItem {
+public class ItemDremicIngot extends MEItem {
 	public ItemDremicIngot(){
 		super();
 		setUnlocalizedName("dremicIngot");

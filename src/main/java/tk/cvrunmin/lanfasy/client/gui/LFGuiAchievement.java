@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.stats.Achievement;
 import net.minecraft.util.ResourceLocation;
-import tk.cvrunmin.fansy.api.client.gui.FGui;
 
 public class LFGuiAchievement extends GuiAchievement{
     private static final ResourceLocation achievementBg = new ResourceLocation("lanfasy", "textures/gui/achievement/achievement_background.png");

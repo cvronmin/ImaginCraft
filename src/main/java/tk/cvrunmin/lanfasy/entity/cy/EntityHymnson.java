@@ -35,6 +35,11 @@ import tk.cvrunmin.lanfasy.util.LogHelper;
 
 public class EntityHymnson extends EntityMob implements IBossDisplayData{
     protected static final IAttribute reinforcementChance = (new RangedAttribute((IAttribute)null, "cyboss.spawnReinforcements", 0.0D, 0.0D, 1.0D)).setDescription("Spawn Reinforcements Chance");
+    private EntityAIAttackOnCollide attackOnCollide = new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, true);
+    private EntityAIWatchClosest watchClosest = new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F);
+    private EntityAIMoveThroughVillage moveThroughVillage = new EntityAIMoveThroughVillage(this, 5.0D, false);
+    private EntityAIHurtByTarget hurtByTarget = new EntityAIHurtByTarget(this, true, new Class[] {EntityUnknown.class});
+    private EntityAINearestAttackableTarget nearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, true);
     protected boolean addedModify = false;
 	public EntityHymnson(World worldIn) {
 		super(worldIn);
@@ -43,7 +48,7 @@ public class EntityHymnson extends EntityMob implements IBossDisplayData{
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(8, new EntityAILookIdle(this));
-        this.applyEntityBossAI();
+//        this.applyEntityBossAI();
 	}
     protected void applyEntityAttributes()
     {
@@ -55,19 +60,19 @@ public class EntityHymnson extends EntityMob implements IBossDisplayData{
     }
     protected void applyEntityBossAI()
     {
-        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, true));
-        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(6, new EntityAIMoveThroughVillage(this, 5.0D, false));
-        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[] {EntityUnknown.class}));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        this.tasks.addTask(2, attackOnCollide);
+        this.tasks.addTask(8, watchClosest);
+        this.tasks.addTask(6, moveThroughVillage);
+        this.targetTasks.addTask(1, hurtByTarget);
+        this.targetTasks.addTask(2, nearestAttackableTarget);
     }
     protected void removeEntityBossAI()
     {
-        this.tasks.removeTask(new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, true));
-        this.tasks.removeTask(new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.removeTask(new EntityAIMoveThroughVillage(this, 5.0D, false));
-        this.targetTasks.removeTask(new EntityAIHurtByTarget(this, true, new Class[] {EntityUnknown.class}));
-        this.targetTasks.removeTask(new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        this.tasks.removeTask(attackOnCollide);
+        this.tasks.removeTask(watchClosest);
+        this.tasks.removeTask(moveThroughVillage);
+        this.targetTasks.removeTask(hurtByTarget);
+        this.targetTasks.removeTask(nearestAttackableTarget);
     }
     protected void entityInit()
     {

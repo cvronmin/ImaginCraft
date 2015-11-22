@@ -10,10 +10,10 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import tk.cvrunmin.fansy.api.block.FBlock;
 import tk.cvrunmin.lanfasy.init.LFItems;
+import tk.cvrunmin.mcme.api.block.MEBlock;
 
-public class BlockDremicOre extends FBlock{
+public class BlockDremicOre extends MEBlock{
 
 	public BlockDremicOre() {
         super(Material.rock);

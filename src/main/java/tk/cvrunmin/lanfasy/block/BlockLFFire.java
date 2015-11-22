@@ -22,12 +22,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tk.cvrunmin.fansy.api.block.FBlock;
 import tk.cvrunmin.lanfasy.init.LFBlocks;
+import tk.cvrunmin.mcme.api.block.MEBlock;
 
 import com.google.common.collect.Maps;
 
-public class BlockLFFire extends FBlock
+public class BlockLFFire extends MEBlock
 {
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 15);
     public static final PropertyBool FLIP = PropertyBool.create("flip");

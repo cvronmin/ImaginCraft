@@ -1,12 +1,10 @@
 package tk.cvrunmin.lanfasy.client.gui;
 
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.util.EnumChatFormatting;
-import tk.cvrunmin.fansy.api.client.gui.FGuiScreen;
+import tk.cvrunmin.mcme.api.client.gui.MEGuiScreen;
 
-public class GuiBSC extends FGuiScreen{
+public class GuiBSC extends MEGuiScreen{
 	public boolean isHardcore;
 	public int count;
     public void initGui()

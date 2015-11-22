@@ -7,10 +7,10 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import tk.cvrunmin.fansy.api.item.FItem;
 import tk.cvrunmin.lanfasy.LFTabs;
+import tk.cvrunmin.mcme.api.item.MEItem;
 
-public class ItemHim2D23 extends FItem{
+public class ItemHim2D23 extends MEItem{
 	int time;
 	public ItemHim2D23(){
 		this.setRegisteredName("HIM2D23");

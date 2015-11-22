@@ -7,10 +7,9 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import tk.cvrunmin.fansy.api.item.crafting.IFRecipe;
 import tk.cvrunmin.lanfasy.init.LFItems;
 import tk.cvrunmin.lanfasy.inventory.InventoryInori;
+import tk.cvrunmin.mcme.api.item.crafting.IMERecipe;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -18,7 +17,7 @@ import com.google.common.collect.Maps;
 public class HECT {
     private static final HECT instance = new HECT();
     /** A list of all the recipes added */
-    private final List<IFRecipe> coreRecipes = Lists.newArrayList();
+    private final List<IMERecipe> coreRecipes = Lists.newArrayList();
     public static HECT getInstance(){
     	return instance;
     }
@@ -41,7 +40,7 @@ public class HECT {
     }
     public ItemStack findCoreRecipe(InventoryInori matrix){
         Iterator iterator = this.coreRecipes.iterator();
-        IFRecipe irecipe;
+        IMERecipe irecipe;
 
         do
         {
@@ -50,7 +49,7 @@ public class HECT {
                 return null;
             }
 
-            irecipe = (IFRecipe)iterator.next();
+            irecipe = (IMERecipe)iterator.next();
         }
         while (!irecipe.matches(matrix));
 		return irecipe.getRecipeOutput();

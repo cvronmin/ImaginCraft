@@ -5,10 +5,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import tk.cvrunmin.fansy.api.item.FItem;
 import tk.cvrunmin.lanfasy.LFTabs;
+import tk.cvrunmin.mcme.api.item.MEItem;
 
-public class ItemRyan extends FItem {
+public class ItemRyan extends MEItem {
 	public ItemRyan(){
 		this.setRegisteredName("ino");
 		this.setUnlocalizedName("ryan");

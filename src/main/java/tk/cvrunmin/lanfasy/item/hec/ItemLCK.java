@@ -6,11 +6,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import tk.cvrunmin.fansy.api.item.FItem;
 import tk.cvrunmin.lanfasy.LFTabs;
-import tk.cvrunmin.lanfasy.util.LogHelper;
+import tk.cvrunmin.mcme.api.item.MEItem;
 
-public class ItemLCK extends FItem{
+public class ItemLCK extends MEItem{
 	Random rand = new Random();
 	public ItemLCK(){
 		this.setRegisteredName("lck");

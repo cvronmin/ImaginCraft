@@ -2,9 +2,9 @@ package tk.cvrunmin.lanfasy.block;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import tk.cvrunmin.fansy.api.block.FBlock;
+import tk.cvrunmin.mcme.api.block.MEBlock;
 
-public class BlockDremic extends FBlock {
+public class BlockDremic extends MEBlock {
 
 	public BlockDremic() {
 		super(Material.rock);

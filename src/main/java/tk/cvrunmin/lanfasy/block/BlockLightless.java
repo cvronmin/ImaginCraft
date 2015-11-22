@@ -10,11 +10,11 @@ import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tk.cvrunmin.fansy.api.block.FBlock;
 import tk.cvrunmin.lanfasy.entity.effect.EntityLightBolt;
 import tk.cvrunmin.lanfasy.util.LFConfig;
+import tk.cvrunmin.mcme.api.block.MEBlock;
 
-public class BlockLightless extends FBlock {
+public class BlockLightless extends MEBlock {
 
 	public BlockLightless() {
 		super(Material.rock);

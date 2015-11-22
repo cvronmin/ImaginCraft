@@ -6,9 +6,9 @@ import java.util.Map.Entry;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import tk.cvrunmin.fansy.api.item.crafting.IFRecipe;
+import tk.cvrunmin.mcme.api.item.crafting.IMERecipe;
 
-public class CoreRecipe implements IFRecipe{
+public class CoreRecipe implements IMERecipe{
 	private HashMap<Integer, ItemStack> in;
 	private ItemStack out;
 

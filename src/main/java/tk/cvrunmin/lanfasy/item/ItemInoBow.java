@@ -1,37 +1,23 @@
 package tk.cvrunmin.lanfasy.item;
 
-import java.util.List;
-import java.util.UUID;
-
-import com.mojang.authlib.GameProfile;
-
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagInt;
-import net.minecraft.nbt.NBTUtil;
 import net.minecraft.stats.StatList;
-import net.minecraft.tileentity.TileEntitySkull;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import tk.cvrunmin.fansy.api.item.FItem;
 import tk.cvrunmin.lanfasy.entity.projectile.EntityInoArrow;
-import tk.cvrunmin.lanfasy.entity.projectile.EntityInoArrow.Fire;
 import tk.cvrunmin.lanfasy.init.LFItems;
 import tk.cvrunmin.lanfasy.util.LogHelper;
+import tk.cvrunmin.mcme.api.item.MEItem;
 
-public class ItemInoBow extends FItem{
+public class ItemInoBow extends MEItem{
     public static final String[] bowPullIconNameArray = new String[] {"pulling_0", "pulling_1", "pulling_2"};
     public int bowState;
     public boolean canTransform;

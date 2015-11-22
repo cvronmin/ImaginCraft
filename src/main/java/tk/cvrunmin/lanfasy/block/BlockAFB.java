@@ -1,11 +1,6 @@
 package tk.cvrunmin.lanfasy.block;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
-
-import com.google.common.collect.Lists;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -13,20 +8,14 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import tk.cvrunmin.fansy.api.block.FBlock;
-import tk.cvrunmin.lanfasy.util.LogHelper;
+import tk.cvrunmin.mcme.api.block.MEBlock;
 
-public class BlockAFB extends FBlock{
+public class BlockAFB extends MEBlock{
 	public static final PropertyBool GHOST = PropertyBool.create("ghost");
 	public BlockAFB() {
 		super(Material.rock);

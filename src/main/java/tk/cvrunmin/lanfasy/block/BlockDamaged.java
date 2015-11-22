@@ -16,11 +16,11 @@ import net.minecraftforge.fml.relauncher.FMLRelaunchLog;
 
 import org.apache.logging.log4j.Level;
 
-import tk.cvrunmin.fansy.api.block.FBlock;
 import tk.cvrunmin.lanfasy.init.LFItems;
 import tk.cvrunmin.lanfasy.util.DamageSourceLF;
+import tk.cvrunmin.mcme.api.block.MEBlock;
 
-public class BlockDamaged extends FBlock {
+public class BlockDamaged extends MEBlock {
 	private Random rand = new Random();
 	public BlockDamaged() {
 		super(Material.ground);

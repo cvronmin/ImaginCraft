@@ -6,12 +6,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Random;
 
-import tk.cvrunmin.fansy.api.client.gui.FGuiIngame;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.GuiNewChat;
 import net.minecraft.client.gui.GuiOverlayDebug;
 import net.minecraft.client.gui.GuiPlayerTabOverlay;
@@ -52,13 +49,14 @@ import net.minecraft.util.StringUtils;
 import net.minecraft.world.border.WorldBorder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tk.cvrunmin.mcme.api.client.gui.MEGuiIngame;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 @SideOnly(Side.CLIENT)
-public class LFGuiIngame extends FGuiIngame
+public class LFGuiIngame extends MEGuiIngame
 {
     protected static final ResourceLocation vignetteTexPath = new ResourceLocation("textures/misc/vignette.png");
     protected static final ResourceLocation widgetsTexPath = new ResourceLocation("lanfasy", "textures/gui/widgets.png");

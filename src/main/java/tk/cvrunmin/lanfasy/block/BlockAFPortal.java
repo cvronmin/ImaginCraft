@@ -20,11 +20,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tk.cvrunmin.fansy.api.block.FBlockContainer;
 import tk.cvrunmin.lanfasy.tileentity.TileEntityAFPortal;
 import tk.cvrunmin.lanfasy.world.TeleporterGenatic;
+import tk.cvrunmin.mcme.api.block.MEBlockContainer;
 
-public class BlockAFPortal extends FBlockContainer
+public class BlockAFPortal extends MEBlockContainer
 {
     public BlockAFPortal()
     {

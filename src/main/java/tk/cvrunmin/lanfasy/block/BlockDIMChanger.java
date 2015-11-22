@@ -8,11 +8,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import tk.cvrunmin.fansy.api.block.FBlockContainer;
 import tk.cvrunmin.lanfasy.Lanfasy;
 import tk.cvrunmin.lanfasy.tileentity.TileEntityDimChanger;
+import tk.cvrunmin.mcme.api.block.MEBlockContainer;
 
-public class BlockDIMChanger extends FBlockContainer{
+public class BlockDIMChanger extends MEBlockContainer{
 
 	public BlockDIMChanger() {
 		super(Material.rock);

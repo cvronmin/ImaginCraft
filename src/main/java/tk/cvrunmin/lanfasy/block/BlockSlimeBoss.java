@@ -8,9 +8,9 @@ import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tk.cvrunmin.fansy.api.block.FBlockBreakable;
+import tk.cvrunmin.mcme.api.block.MEBlockBreakable;
 
-public class BlockSlimeBoss extends FBlockBreakable {
+public class BlockSlimeBoss extends MEBlockBreakable {
 
 	public BlockSlimeBoss() {
         super(Material.clay, false);

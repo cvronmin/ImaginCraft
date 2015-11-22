@@ -10,11 +10,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
-import tk.cvrunmin.fansy.api.item.FItem;
 import tk.cvrunmin.lanfasy.entity.projectile.EntityFireArrow;
 import tk.cvrunmin.lanfasy.init.LFItems;
+import tk.cvrunmin.mcme.api.item.MEItem;
 
-public class ItemFireBow extends FItem{
+public class ItemFireBow extends MEItem{
     public static final String[] bowPullIconNameArray = new String[] {"pulling_0", "pulling_1", "pulling_2"};
 
     public ItemFireBow()

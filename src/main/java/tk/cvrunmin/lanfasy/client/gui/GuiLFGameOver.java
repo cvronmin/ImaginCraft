@@ -3,7 +3,6 @@ package tk.cvrunmin.lanfasy.client.gui;
 import java.io.IOException;
 import java.util.Iterator;
 
-import tk.cvrunmin.fansy.api.client.gui.FGuiScreen;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiScreen;
@@ -11,15 +10,14 @@ import net.minecraft.client.gui.GuiYesNo;
 import net.minecraft.client.gui.GuiYesNoCallback;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tk.cvrunmin.mcme.api.client.gui.MEGuiScreen;
 
 @SideOnly(Side.CLIENT)
-public class GuiLFGameOver extends FGuiScreen implements GuiYesNoCallback
+public class GuiLFGameOver extends MEGuiScreen implements GuiYesNoCallback
 {
     /** The integer value containing the number of ticks that have passed since the player's death */
     private int enableButtonsTimer;
