@@ -40,6 +40,7 @@ import tk.cvrunmin.lanfasy.entity.projectile.EntityFireArrow;
 import tk.cvrunmin.lanfasy.entity.projectile.EntityInoArrow;
 import tk.cvrunmin.lanfasy.entity.projectile.EntityIrrow;
 import tk.cvrunmin.lanfasy.entity.projectile.EntitySafeIrrow;
+import tk.cvrunmin.lanfasy.event.EventMessBoss;
 import tk.cvrunmin.lanfasy.init.LFBlocks;
 import tk.cvrunmin.lanfasy.init.LFItems;
 import tk.cvrunmin.lanfasy.tileentity.TileEntityAFPortal;
@@ -137,6 +138,7 @@ public class Lanfasy {
 		MinecraftForge.EVENT_BUS.register(tickserver);
 		FMLCommonHandler.instance().bus().register(tickserver);
 		FMLCommonHandler.instance().bus().register(config);
+		MinecraftForge.EVENT_BUS.register(new EventMessBoss());
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new LFGuiHandler());
 /*        if(side.isClient()){
         proxy.registerBlockRenderers();

@@ -23,7 +23,6 @@ import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -34,12 +33,10 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import tk.cvrunmin.lanfasy.init.LFHecItems;
-import tk.cvrunmin.lanfasy.util.LogHelper;
 
-public class EntityHymnson extends EntityMess implements IBossDisplayData{
+public class EntityWaiWai extends EntityMess implements IBossDisplayData{
     protected static final IAttribute reinforcementChance = (new RangedAttribute((IAttribute)null, "cyboss.spawnReinforcements", 0.0D, 0.0D, 1.0D)).setDescription("Spawn Reinforcements Chance");
     private EntityAIAttackOnCollide attackOnCollide = new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, true);
     private EntityAIWatchClosest watchClosest = new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F);
@@ -47,16 +44,14 @@ public class EntityHymnson extends EntityMess implements IBossDisplayData{
     private EntityAIHurtByTarget hurtByTarget = new EntityAIHurtByTarget(this, true, new Class[] {EntityUnknown.class});
     private EntityAINearestAttackableTarget nearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, true);
     protected boolean addedModify = false;
-    protected String targetBlock = "minecraft:water", replaceBlock = "minecraft:lava";
-    protected boolean doLightning = true, doReplacing = true;
-	public EntityHymnson(World worldIn) {
+	public EntityWaiWai(World worldIn) {
 		super(worldIn);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiAvoidExplodingCreepers);
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(8, new EntityAILookIdle(this));
-//        this.applyEntityBossAI();
+        this.applyEntityBossAI();
 	}
     protected void applyEntityAttributes()
     {
@@ -92,85 +87,80 @@ public class EntityHymnson extends EntityMess implements IBossDisplayData{
 
     public void onLivingUpdate()
     {
-    	if (this.getHealth() / this.getMaxHealth() > 0.3f) {
+    	if (this.getHealth() / this.getMaxHealth() > 0.5f) {
 			setMode((byte)0);
 		}
-    	if (this.getHealth() / this.getMaxHealth() <= 0.3f) {
+    	if (this.getHealth() / this.getMaxHealth() <= 0.5f) {
 			setMode((byte)2);
-			applyEntityBossAI();
-		}
-    	if (this.getHealth() / this.getMaxHealth() <= 0.05f) {
-			setMode((byte)4);
-			removeEntityBossAI();
 		}
     	switch (getMode()) {
 		case 0:case 1:
-			onDefenceMode();
-			break;
-		case 2:case 3:
 			onAttackMode();
 			break;
-		case 4:case 5:
-			onEscapeMode();
+		case 2:case 3:
+			onStrongAttackMode();
 			break;
 		default:
 			break;
 		}
     	super.onLivingUpdate();
     }
-    protected void onDefenceMode(){
-    	if (this.getHealth() < this.getMaxHealth()) {
-			this.heal(0.05f);
-		}
-    	if (!worldObj.isRemote) {
-            int tri = rand.nextInt(100);
-            try {
-                if (tri < 25 && doReplacing) {
-                	for (int x = -1; x <= 1; x++) {
-                    	for (int y = -1; y <= 1; y++) {
-                        	for (int z = -1; z <= 1; z++) {
-                        		Block blk = worldObj.getBlockState(new BlockPos(this.posX + x, this.posY + y, this.posZ + z)).getBlock();
-                        		if (blk.equals(Block.getBlockFromName(targetBlock)) && rand.nextBoolean() && (y != posY + 1 && x != posX && z != posZ)) {
-            						worldObj.setBlockState(new BlockPos(this.posX + x, this.posY + y, this.posZ + z), Block.getBlockFromName(replaceBlock).getDefaultState());
-            						break;
-            					}
-                    		}
-                		}
-            		}
-        		}	
-			} catch (Exception e) {}
-
-		}
-    }
     protected void onAttackMode(){
     	if(!worldObj.isRemote){
             int tri = rand.nextInt(100);
-            try {
-            	if(tri < 5 && doLightning){
-            		worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, prevPosX + rand.nextDouble() * 10 * (rand.nextBoolean() ? -1 : 1), prevPosY + rand.nextDouble() * 10 * (rand.nextBoolean() ? -1 : 1), prevPosZ + rand.nextDouble() * 10 * (rand.nextBoolean() ? -1 : 1)));
-            	}
-            	if (tri < 10 && tri >= 5 && doReplacing) {
-            		for (int x = -5; x <= 5; x++) {
-            			for (int y = -5; y <= 5; y++) {
-            				for (int z = -5; z <= 5; z++) {
-            					Block blk = worldObj.getBlockState(new BlockPos(this.posX + x, this.posY + y, this.posZ + z)).getBlock();
-            					if (blk.equals(Block.getBlockFromName(targetBlock)) && rand.nextBoolean() && (y != posY + 1 && x != posX && z != posZ)) {
-            						for (int x1 = -1; x1 <= 1; x1++) {
-            							for (int z1 = -1; z1 <= 1; z1++) {
-            								Block blk2 = worldObj.getBlockState(new BlockPos(this.posX + x + x1, this.posY + y, this.posZ + z + z1)).getBlock();
-            								if (blk2.equals(Block.getBlockFromName(targetBlock)) && (y != posY + 1 && x != posX && z != posZ)) {
-            									worldObj.setBlockState(new BlockPos(this.posX + x + x1, this.posY + y, this.posZ + z + z1), Block.getBlockFromName(replaceBlock).getDefaultState());
-            								}
-            							}
-            						}
-            						break;
-            					}
-            				}
-            			}
+        	if(tri < 5){
+        	worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, prevPosX + rand.nextDouble() * 10 * (rand.nextBoolean() ? -1 : 1), prevPosY + rand.nextDouble() * 10 * (rand.nextBoolean() ? -1 : 1), prevPosZ + rand.nextDouble() * 10 * (rand.nextBoolean() ? -1 : 1)));
+        	}
+        	if (tri < 5) {
+            	for (int x = -5; x <= 5; x++) {
+                	for (int y = -5; y <= 5; y++) {
+                    	for (int z = -5; z <= 5; z++) {
+                    		Block blk = worldObj.getBlockState(new BlockPos(this.posX + x, this.posY + y, this.posZ + z)).getBlock();
+                    		if (blk.equals(Blocks.water) && rand.nextBoolean() && (y != posY + 1 && x != posX && z != posZ)) {
+                    	    	for (int x1 = -1; x1 <= 1; x1++) {
+                    	    		for (int z1 = -1; z1 <= 1; z1++) {
+                    	    			Block blk2 = worldObj.getBlockState(new BlockPos(this.posX + x + x1, this.posY + y, this.posZ + z + z1)).getBlock();
+                    	    			if (blk2.equals(Blocks.water) && (y != posY + 1 && x != posX && z != posZ)) {
+                    	    				worldObj.setBlockState(new BlockPos(this.posX + x + x1, this.posY + y, this.posZ + z + z1), Blocks.lava.getDefaultState());
+                    	    			}
+                    	    		}
+                    			}
+        						break;
+        					}
+                		}
             		}
-            	}
-			} catch (Exception e) {}
-
+        		}
+			}
+        	
+    	}
+    }
+    protected void onStrongAttackMode(){
+    	if(!worldObj.isRemote){
+            int tri = rand.nextInt(100);
+        	if(tri < 5){
+        	worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, prevPosX + rand.nextDouble() * 10 * (rand.nextBoolean() ? -1 : 1), prevPosY + rand.nextDouble() * 10 * (rand.nextBoolean() ? -1 : 1), prevPosZ + rand.nextDouble() * 10 * (rand.nextBoolean() ? -1 : 1)));
+        	}
+        	if (tri < 5) {
+            	for (int x = -5; x <= 5; x++) {
+                	for (int y = -5; y <= 5; y++) {
+                    	for (int z = -5; z <= 5; z++) {
+                    		Block blk = worldObj.getBlockState(new BlockPos(this.posX + x, this.posY + y, this.posZ + z)).getBlock();
+                    		if (blk.equals(Blocks.water) && rand.nextBoolean() && (y != posY + 1 && x != posX && z != posZ)) {
+                    	    	for (int x1 = -1; x1 <= 1; x1++) {
+                    	    		for (int z1 = -1; z1 <= 1; z1++) {
+                    	    			Block blk2 = worldObj.getBlockState(new BlockPos(this.posX + x + x1, this.posY + y, this.posZ + z + z1)).getBlock();
+                    	    			if (blk2.equals(Blocks.water) && (y != posY + 1 && x != posX && z != posZ)) {
+                    	    				worldObj.setBlockState(new BlockPos(this.posX + x + x1, this.posY + y, this.posZ + z + z1), Blocks.lava.getDefaultState());
+                    	    			}
+                    	    		}
+                    			}
+        						break;
+        					}
+                		}
+            		}
+        		}
+			}
+        	
     	}
     }
     protected void onEscapeMode(){
@@ -189,22 +179,6 @@ public class EntityHymnson extends EntityMess implements IBossDisplayData{
             }, 6.0F, 1.0D, 1.5D));
         	addedModify = true;
 		}
-    }
-    public void readEntityFromNBT(NBTTagCompound tagCompound)
-    {
-        super.readEntityFromNBT(tagCompound);
-        this.targetBlock = tagCompound.getString("TargetBlock");
-        this.replaceBlock = tagCompound.getString("ReplaceBlock");
-        this.doLightning = tagCompound.getBoolean("DoLightning");
-        this.doReplacing = tagCompound.getBoolean("DoReplacing");
-    }
-    public void writeEntityToNBT(NBTTagCompound tagCompound)
-    {
-        super.writeEntityToNBT(tagCompound);
-        tagCompound.setString("TargetBlock", targetBlock);
-        tagCompound.setString("ReplaceBlock", replaceBlock);
-        tagCompound.setBoolean("DoLightning", doLightning);
-        tagCompound.setBoolean("DoReplacing", doReplacing);
     }
     public boolean attackEntityFrom(DamageSource source, float amount)
     {

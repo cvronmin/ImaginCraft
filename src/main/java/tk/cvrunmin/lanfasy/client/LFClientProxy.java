@@ -135,5 +135,7 @@ public class LFClientProxy extends LFCommonProxy{
 	}
 	private void registerHERenderers(){
 		this.itemRend(LFHecItems.him2d23);
+		this.itemRend(LFHecItems.macrystal, 0, "macrystal_pure");
+		ModelBakery.addVariantName(LFHecItems.macrystal, "lanfasy:macrystal_pure");
 	}
 }

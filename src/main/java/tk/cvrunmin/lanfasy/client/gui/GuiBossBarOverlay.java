@@ -10,12 +10,14 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import tk.cvrunmin.lanfasy.Lanfasy;
 import tk.cvrunmin.lanfasy.entity.cy.CYBossStatus;
+import tk.cvrunmin.lanfasy.entity.cy.EntityMess;
 import tk.cvrunmin.lanfasy.util.LogHelper;
 import tk.cvrunmin.mcme.api.client.gui.MEGui;
 
 public class GuiBossBarOverlay extends MEGui {
 	private static final ResourceLocation baricons = new ResourceLocation(Lanfasy.MODID, "textures/gui/baricons.png");
 	Minecraft mc;
+	int process = 0;
 	public GuiBossBarOverlay(Minecraft mc){
 		super();
 		this.mc = mc;
@@ -33,25 +35,35 @@ public class GuiBossBarOverlay extends MEGui {
 	            int i = scaledresolution.getScaledWidth();
 	            short short1 = 182;
 	            int j = i / 2 - short1 / 2;
-	            int k = (int)(CYBossStatus.healthScaleDivided * (float)(short1 + 1));
-	            LogHelper.info(CYBossStatus.healthScaleDivided + " And " + k);
+	            int k = (int)(CYBossStatus.healthScaleDivided * (float)(short1));
+//	            LogHelper.info(CYBossStatus.healthScaleDivided + " And " + k);
 	            byte b0 = 12;
+	            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+	            GlStateManager.enableAlpha();
+	            this.mc.getTextureManager().bindTexture(baricons);
 	            this.drawTexturedModalRect(j, b0, 0, 0, short1, 10);
-//	            drawRect(j, b0, (j + short1) * scaledresolution.getScaleFactor(), scaledresolution.getScaleFactor() * (b0 + 10), 0x000000);
-	            this.drawTexturedModalRect(j, b0, 0, 0, short1, 10);
-	            
+	            int modifier = 0;
+	            if (CYBossStatus.displayer instanceof EntityMess) {
+	            	LogHelper.info("success line:47");
+					if (((EntityMess)CYBossStatus.displayer).isInvulnerable()) {
+						modifier = 20;
+		            	LogHelper.info("success line:49");
+					}
+				}
 	            if (k > 0)
 	            {
-//		            drawRect(j, b0, (j + k) * scaledresolution.getScaleFactor(), scaledresolution.getScaleFactor() * (b0 + 10), 0x00FF00);
-	                this.drawTexturedModalRect(j, b0, 0, 10, k, 10);
+	            	if (CYBossStatus.healthBarDivide <= 3) {
+		                this.drawTexturedModalRect(j, b0, 0, 20 + modifier, k, 10);
+					} else {
+		                this.drawTexturedModalRect(j, b0, 0, 10 + modifier, k, 10);
+					}
 	            }
 
 	            String s = CYBossStatus.bossName;
 	            String s1 = "x" + CYBossStatus.healthBarDivide;
 	            this.getFontRenderer().drawStringWithShadow(s, (float)(i / 2 - this.getFontRenderer().getStringWidth(s) / 2), (float)(b0 + 1), 16777215);
 	            this.getFontRenderer().drawStringWithShadow(s1, (float)(j + short1 - this.getFontRenderer().getStringWidth(s1) - 5), (float)(b0 + 1), 16777215);
-	            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-	            this.mc.getTextureManager().bindTexture(baricons);
+	            GlStateManager.disableAlpha();
 	        }
 	  }
 	    public FontRenderer getFontRenderer()
