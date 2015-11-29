@@ -45,11 +45,12 @@ public class GuiBossBarOverlay extends MEGui {
 	            int modifier = 0;
 	            if (CYBossStatus.displayer instanceof EntityMess) {
 	            	LogHelper.info("success line:47");
-					if (((EntityMess)CYBossStatus.displayer).isInvulnerable()) {
-						modifier = 20;
-		            	LogHelper.info("success line:49");
-					}
-				}
+	            	LogHelper.info(CYBossStatus.displayer.toString());
+	            	if (((EntityMess)CYBossStatus.displayer).isInvulnerable()) {
+	            	    modifier = 20;
+	            	    LogHelper.info("success line:49");
+	            	}
+	            }
 	            if (k > 0)
 	            {
 	            	if (CYBossStatus.healthBarDivide <= 3) {

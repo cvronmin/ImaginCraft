@@ -21,8 +21,8 @@ plugins {
 }
 
 version = "1.0"
-group= "com.yourname.modid" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "modid"
+group= "io.github.cvronmin.lanfasy" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "ImaginCraft"
 
 minecraft {
     version = "1.8-11.14.4.1563"
@@ -33,7 +33,7 @@ minecraft {
     // stable_#            stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not allways work.
     // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = "snapshot_20151114"
+    mappings = "snapshot_20151120"
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
@@ -80,3 +80,4 @@ processResources
         exclude 'mcmod.info'
     }
 }
+

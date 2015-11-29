@@ -22,13 +22,13 @@ public abstract class EntityMess extends EntityMob{
     public void onLivingUpdate()
     {
     	if (!isAlwaysSkipDamage()) {
-        	if (getMode() % 2 == 1) {
-            	setInvulnerable(true);
-    		}
-        	else{
-    			setInvulnerable(false);
-    		}		
-		}
+    	    if (getMode() % 2 == 1) {
+    		setInvulnerable(true);
+    	    }
+    	    else{
+    		setInvulnerable(false);
+    	    }
+    	}
     	super.onLivingUpdate();
     }
     public void readEntityFromNBT(NBTTagCompound tagCompund)
@@ -72,7 +72,7 @@ public abstract class EntityMess extends EntityMob{
     protected void setMode(byte modeid){
     	if (!isLockedMode()) {
         	this.mode = modeid;
-		}
+	}
     }
     protected byte getMode(){
     	return mode;

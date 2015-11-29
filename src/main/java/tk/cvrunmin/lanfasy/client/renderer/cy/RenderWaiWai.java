@@ -12,24 +12,24 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import tk.cvrunmin.lanfasy.Lanfasy;
 import tk.cvrunmin.lanfasy.entity.cy.CYBossStatus;
-import tk.cvrunmin.lanfasy.entity.cy.EntityHymnson;
+import tk.cvrunmin.lanfasy.entity.cy.EntityWaiWai;
 
-public class RenderHymnson extends RenderLiving {
-	private final static ResourceLocation hymnsonTexture = new ResourceLocation(Lanfasy.MODID, "textures/entity/cy/hymnson.png");
-	public RenderHymnson() {
+public class RenderWaiWai extends RenderLiving {
+	private final static ResourceLocation texture = new ResourceLocation(Lanfasy.MODID, "textures/entity/cy/chw.png");
+	public RenderWaiWai() {
         super(Minecraft.getMinecraft().getRenderManager(), new ModelPlayer(0f,false), 0.5F);
         this.addLayer(new LayerHeldItem(this));
         this.addLayer(new LayerBipedArmor(this));
         this.addLayer(new LayerArrow(this));
 	}
-	protected ResourceLocation getEntityTexture(EntityHymnson entity) {
-		return hymnsonTexture;
+	protected ResourceLocation getEntityTexture(EntityWaiWai entity) {
+		return texture;
 	}
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		return this.getEntityTexture((EntityHymnson)entity);
+		return this.getEntityTexture((EntityWaiWai)entity);
 	}
-    protected void preRenderCallback(EntityHymnson entitylivingbaseIn, float partialTickTime)
+    protected void preRenderCallback(EntityWaiWai entitylivingbaseIn, float partialTickTime)
     {
         float f1 = 0.9375F;
         GlStateManager.scale(f1, f1, f1);
@@ -40,7 +40,7 @@ public class RenderHymnson extends RenderLiving {
      */
     protected void preRenderCallback(EntityLivingBase entitylivingbaseIn, float partialTickTime)
     {
-        this.preRenderCallback((EntityHymnson)entitylivingbaseIn, partialTickTime);
+        this.preRenderCallback((EntityWaiWai)entitylivingbaseIn, partialTickTime);
     }
     /**
      * Actually renders the given argument. This is a synthetic bridge method, always casting down its argument and then
@@ -52,7 +52,7 @@ public class RenderHymnson extends RenderLiving {
      */
     public void doRender(EntityLivingBase entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
-        this.doRender((EntityHymnson)entity, x, y, z, entityYaw, partialTicks);
+        this.doRender((EntityWaiWai)entity, x, y, z, entityYaw, partialTicks);
     }
     /**
      * Actually renders the given argument. This is a synthetic bridge method, always casting down its argument and then
@@ -64,9 +64,9 @@ public class RenderHymnson extends RenderLiving {
      */
     public void doRender(Entity entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
-        this.doRender((EntityHymnson)entity, x, y, z, entityYaw, partialTicks);
+        this.doRender((EntityWaiWai)entity, x, y, z, entityYaw, partialTicks);
     }
-    public void doRender(EntityHymnson entity, double x, double y, double z, float entityYaw, float partialTicks)
+    public void doRender(EntityWaiWai entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
     	CYBossStatus.setBossStatus(entity, true);
     	super.doRender(entity, x, y, z, entityYaw, partialTicks);

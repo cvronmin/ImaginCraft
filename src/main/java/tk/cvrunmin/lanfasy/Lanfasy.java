@@ -21,7 +21,6 @@ import tk.cvrunmin.lanfasy.client.gui.GuiBossBarOverlay;
 import tk.cvrunmin.lanfasy.client.gui.GuiCHWOverlay;
 import tk.cvrunmin.lanfasy.client.gui.LFGuiHandler;
 import tk.cvrunmin.lanfasy.command.CommandDIMTeleport;
-import tk.cvrunmin.lanfasy.command.CommandSpeed;
 import tk.cvrunmin.lanfasy.entity.LFEntityCreeper;
 import tk.cvrunmin.lanfasy.entity.LFEntityCreeperBoss;
 import tk.cvrunmin.lanfasy.entity.LFEntityEnderman;
@@ -34,6 +33,7 @@ import tk.cvrunmin.lanfasy.entity.LFEntitySpider;
 import tk.cvrunmin.lanfasy.entity.LFEntityZombie;
 import tk.cvrunmin.lanfasy.entity.LFEntityZombieBoss;
 import tk.cvrunmin.lanfasy.entity.cy.EntityHymnson;
+import tk.cvrunmin.lanfasy.entity.cy.EntityWaiWai;
 import tk.cvrunmin.lanfasy.entity.item.EntityGreenstal;
 import tk.cvrunmin.lanfasy.entity.item.EntityRedstal;
 import tk.cvrunmin.lanfasy.entity.projectile.EntityFireArrow;
@@ -47,7 +47,6 @@ import tk.cvrunmin.lanfasy.tileentity.TileEntityAFPortal;
 import tk.cvrunmin.lanfasy.tileentity.TileEntityRepairFurnace;
 import tk.cvrunmin.lanfasy.util.LFConfig;
 import tk.cvrunmin.lanfasy.world.WorldProviderAltifect;
-import tk.cvrunmin.lanfasy.world.WorldProviderCrashHell;
 import tk.cvrunmin.lanfasy.world.WorldProviderLF;
 import tk.cvrunmin.lanfasy.world.gen.LFWorldGenMinable;
 
@@ -191,7 +190,9 @@ public class Lanfasy {
     	i = EntityRegistry.findGlobalUniqueEntityId();
     	registerEntity(EntityGreenstal.class, "Greenstal", i);
     	i = EntityRegistry.findGlobalUniqueEntityId();
-    	registerEntity(EntityHymnson.class, "Prayer", i, 0xFC1296, 0xAC2046);
+    	registerEntity(EntityHymnson.class, "Prayer", i, 0x153A05, 0x142A06);
+    	i = EntityRegistry.findGlobalUniqueEntityId();
+    	registerEntity(EntityWaiWai.class, "Txper", i, 0x153D01, 0x142A02);
         GameRegistry.registerTileEntity(TileEntityRepairFurnace.class, "TileEntityReFur");
         GameRegistry.registerTileEntity(TileEntityAFPortal.class, "TileEntityAFPortal");
     }

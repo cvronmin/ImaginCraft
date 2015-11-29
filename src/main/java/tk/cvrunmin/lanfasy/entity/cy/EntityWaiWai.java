@@ -34,11 +34,13 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import tk.cvrunmin.lanfasy.entity.ai.EntityAIAttackWithDrop;
 import tk.cvrunmin.lanfasy.init.LFHecItems;
 
 public class EntityWaiWai extends EntityMess implements IBossDisplayData{
     protected static final IAttribute reinforcementChance = (new RangedAttribute((IAttribute)null, "cyboss.spawnReinforcements", 0.0D, 0.0D, 1.0D)).setDescription("Spawn Reinforcements Chance");
     private EntityAIAttackOnCollide attackOnCollide = new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, true);
+    private EntityAIAttackWithDrop attackWithDrop = new EntityAIAttackWithDrop(this, EntityPlayer.class, 1.0D, true);
     private EntityAIWatchClosest watchClosest = new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F);
     private EntityAIMoveThroughVillage moveThroughVillage = new EntityAIMoveThroughVillage(this, 5.0D, false);
     private EntityAIHurtByTarget hurtByTarget = new EntityAIHurtByTarget(this, true, new Class[] {EntityUnknown.class});
@@ -63,7 +65,6 @@ public class EntityWaiWai extends EntityMess implements IBossDisplayData{
     }
     protected void applyEntityBossAI()
     {
-        this.tasks.addTask(2, attackOnCollide);
         this.tasks.addTask(8, watchClosest);
         this.tasks.addTask(6, moveThroughVillage);
         this.targetTasks.addTask(1, hurtByTarget);
@@ -71,7 +72,6 @@ public class EntityWaiWai extends EntityMess implements IBossDisplayData{
     }
     protected void removeEntityBossAI()
     {
-        this.tasks.removeTask(attackOnCollide);
         this.tasks.removeTask(watchClosest);
         this.tasks.removeTask(moveThroughVillage);
         this.targetTasks.removeTask(hurtByTarget);
@@ -106,79 +106,12 @@ public class EntityWaiWai extends EntityMess implements IBossDisplayData{
     	super.onLivingUpdate();
     }
     protected void onAttackMode(){
-    	if(!worldObj.isRemote){
-            int tri = rand.nextInt(100);
-        	if(tri < 5){
-        	worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, prevPosX + rand.nextDouble() * 10 * (rand.nextBoolean() ? -1 : 1), prevPosY + rand.nextDouble() * 10 * (rand.nextBoolean() ? -1 : 1), prevPosZ + rand.nextDouble() * 10 * (rand.nextBoolean() ? -1 : 1)));
-        	}
-        	if (tri < 5) {
-            	for (int x = -5; x <= 5; x++) {
-                	for (int y = -5; y <= 5; y++) {
-                    	for (int z = -5; z <= 5; z++) {
-                    		Block blk = worldObj.getBlockState(new BlockPos(this.posX + x, this.posY + y, this.posZ + z)).getBlock();
-                    		if (blk.equals(Blocks.water) && rand.nextBoolean() && (y != posY + 1 && x != posX && z != posZ)) {
-                    	    	for (int x1 = -1; x1 <= 1; x1++) {
-                    	    		for (int z1 = -1; z1 <= 1; z1++) {
-                    	    			Block blk2 = worldObj.getBlockState(new BlockPos(this.posX + x + x1, this.posY + y, this.posZ + z + z1)).getBlock();
-                    	    			if (blk2.equals(Blocks.water) && (y != posY + 1 && x != posX && z != posZ)) {
-                    	    				worldObj.setBlockState(new BlockPos(this.posX + x + x1, this.posY + y, this.posZ + z + z1), Blocks.lava.getDefaultState());
-                    	    			}
-                    	    		}
-                    			}
-        						break;
-        					}
-                		}
-            		}
-        		}
-			}
-        	
-    	}
+        this.tasks.addTask(2, attackOnCollide);
+        this.tasks.removeTask(attackWithDrop);
     }
     protected void onStrongAttackMode(){
-    	if(!worldObj.isRemote){
-            int tri = rand.nextInt(100);
-        	if(tri < 5){
-        	worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, prevPosX + rand.nextDouble() * 10 * (rand.nextBoolean() ? -1 : 1), prevPosY + rand.nextDouble() * 10 * (rand.nextBoolean() ? -1 : 1), prevPosZ + rand.nextDouble() * 10 * (rand.nextBoolean() ? -1 : 1)));
-        	}
-        	if (tri < 5) {
-            	for (int x = -5; x <= 5; x++) {
-                	for (int y = -5; y <= 5; y++) {
-                    	for (int z = -5; z <= 5; z++) {
-                    		Block blk = worldObj.getBlockState(new BlockPos(this.posX + x, this.posY + y, this.posZ + z)).getBlock();
-                    		if (blk.equals(Blocks.water) && rand.nextBoolean() && (y != posY + 1 && x != posX && z != posZ)) {
-                    	    	for (int x1 = -1; x1 <= 1; x1++) {
-                    	    		for (int z1 = -1; z1 <= 1; z1++) {
-                    	    			Block blk2 = worldObj.getBlockState(new BlockPos(this.posX + x + x1, this.posY + y, this.posZ + z + z1)).getBlock();
-                    	    			if (blk2.equals(Blocks.water) && (y != posY + 1 && x != posX && z != posZ)) {
-                    	    				worldObj.setBlockState(new BlockPos(this.posX + x + x1, this.posY + y, this.posZ + z + z1), Blocks.lava.getDefaultState());
-                    	    			}
-                    	    		}
-                    			}
-        						break;
-        					}
-                		}
-            		}
-        		}
-			}
-        	
-    	}
-    }
-    protected void onEscapeMode(){
-    	if (!addedModify) {
-        	this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).applyModifier(new AttributeModifier("Escape Mode Bonus", 0.2d, 0));
-            this.tasks.addTask(3, new EntityAIAvoidEntity(this, new Predicate()
-            {
-                public boolean apply(Entity entity)
-                {
-                    return entity instanceof EntityPlayer;
-                }
-                public boolean apply(Object p_apply_1_)
-                {
-                    return this.apply((Entity)p_apply_1_);
-                }
-            }, 6.0F, 1.0D, 1.5D));
-        	addedModify = true;
-		}
+        this.tasks.addTask(2, attackWithDrop);
+        this.tasks.removeTask(attackOnCollide);
     }
     public boolean attackEntityFrom(DamageSource source, float amount)
     {
@@ -271,7 +204,7 @@ public class EntityWaiWai extends EntityMess implements IBossDisplayData{
 
             for (int k = 0; k < j; ++k)
             {
-                this.entityDropItem(new ItemStack(LFHecItems.macrystal, 1, 1), 0f);
+                this.entityDropItem(new ItemStack(LFHecItems.macrystal, 1, 2), 0f);
             }
         }
     }
