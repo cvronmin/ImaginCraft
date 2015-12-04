@@ -43,6 +43,8 @@ public class ItemMACrystal extends MEItem{
 	            return StatCollector.translateToLocal("item.macrystal.name.kart").trim();
 			case 7:
 	            return StatCollector.translateToLocal("item.macrystal.name.dround").trim();
+			case 8:
+	            return StatCollector.translateToLocal("item.macrystal.name.void").trim();
 			case 21:
 	            return StatCollector.translateToLocal("item.macrystal.name.O").trim();
 			case 22:

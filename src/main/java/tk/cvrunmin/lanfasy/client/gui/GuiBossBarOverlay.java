@@ -44,11 +44,11 @@ public class GuiBossBarOverlay extends MEGui {
 	            this.drawTexturedModalRect(j, b0, 0, 0, short1, 10);
 	            int modifier = 0;
 	            if (CYBossStatus.displayer instanceof EntityMess) {
-	            	LogHelper.info("success line:47");
-	            	LogHelper.info(CYBossStatus.displayer.toString());
+//	            	LogHelper.info("success line:47");
+//	            	LogHelper.info(CYBossStatus.displayer.toString());
 	            	if (((EntityMess)CYBossStatus.displayer).isInvulnerable()) {
 	            	    modifier = 20;
-	            	    LogHelper.info("success line:49");
+//	            	    LogHelper.info("success line:49");
 	            	}
 	            }
 	            if (k > 0)

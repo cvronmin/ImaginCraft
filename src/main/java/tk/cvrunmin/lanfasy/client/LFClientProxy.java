@@ -139,6 +139,17 @@ public class LFClientProxy extends LFCommonProxy{
 	private void registerHERenderers(){
 		this.itemRend(LFHecItems.him2d23);
 		this.itemRend(LFHecItems.macrystal, 0, "macrystal_pure");
-		ModelBakery.addVariantName(LFHecItems.macrystal, "lanfasy:macrystal_pure");
+		this.itemRend(LFHecItems.macrystal, 1, "macrystal_prayer");
+		this.itemRend(LFHecItems.macrystal, 2, "macrystal_txper");
+		this.itemRend(LFHecItems.macrystal, 3, "macrystal_shere");
+		this.itemRend(LFHecItems.macrystal, 4, "macrystal_ender");
+		this.itemRend(LFHecItems.macrystal, 5, "macrystal_power");
+		this.itemRend(LFHecItems.macrystal, 6, "macrystal_kart");
+		this.itemRend(LFHecItems.macrystal, 7, "macrystal_dround");
+		this.itemRend(LFHecItems.macrystal, 8, "macrystal_void");
+		this.itemRend(LFHecItems.macrystal, 21, "macrystal_O");
+		this.itemRend(LFHecItems.macrystal, 22, "macrystal_gsound");
+		ModelBakery.addVariantName(LFHecItems.macrystal, "lanfasy:macrystal_pure", "macrystal_prayer", "macrystal_txper", "macrystal_shere", "macrystal_ender", "macrystal_power", "macrystal_kart", "macrystal_dround", "macrystal_void",
+				"macrystal_O", "macrystal_gsound");
 	}
 }

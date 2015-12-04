@@ -23,10 +23,10 @@ public abstract class EntityMess extends EntityMob{
     {
     	if (!isAlwaysSkipDamage()) {
     	    if (getMode() % 2 == 1) {
-    		setInvulnerable(true);
+    	    	setInvulnerable(true);
     	    }
     	    else{
-    		setInvulnerable(false);
+    	    	setInvulnerable(false);
     	    }
     	}
     	super.onLivingUpdate();
@@ -74,7 +74,7 @@ public abstract class EntityMess extends EntityMob{
         	this.mode = modeid;
 	}
     }
-    protected byte getMode(){
+    public byte getMode(){
     	return mode;
     }
     protected void lockMode(boolean flag){

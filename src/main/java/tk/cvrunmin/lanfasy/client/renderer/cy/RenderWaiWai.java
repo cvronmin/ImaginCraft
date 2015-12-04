@@ -16,6 +16,7 @@ import tk.cvrunmin.lanfasy.entity.cy.EntityWaiWai;
 
 public class RenderWaiWai extends RenderLiving {
 	private final static ResourceLocation texture = new ResourceLocation(Lanfasy.MODID, "textures/entity/cy/chw.png");
+	private final static ResourceLocation texture2 = new ResourceLocation(Lanfasy.MODID, "textures/entity/cy/chw2.png");
 	public RenderWaiWai() {
         super(Minecraft.getMinecraft().getRenderManager(), new ModelPlayer(0f,false), 0.5F);
         this.addLayer(new LayerHeldItem(this));
@@ -23,7 +24,7 @@ public class RenderWaiWai extends RenderLiving {
         this.addLayer(new LayerArrow(this));
 	}
 	protected ResourceLocation getEntityTexture(EntityWaiWai entity) {
-		return texture;
+		return entity.getMode() == 2 ? texture2 : (entity.getMode() == 3 ? texture2 : (entity.getMode() == 1 ? texture : texture));
 	}
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {

@@ -2,8 +2,6 @@ package tk.cvrunmin.lanfasy.command;
 
 import java.util.List;
 
-import scala.util.control.Exception;
-import tk.cvrunmin.lanfasy.world.TeleporterGenatic;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -13,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockPos;
 import net.minecraftforge.common.DimensionManager;
+import tk.cvrunmin.lanfasy.world.TeleporterGenatic;
 
 public class CommandDIMTeleport extends CommandBase {
 

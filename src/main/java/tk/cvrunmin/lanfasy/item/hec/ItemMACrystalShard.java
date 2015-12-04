@@ -51,6 +51,9 @@ public class ItemMACrystalShard extends MEItem{
 			case 7:
 	            s = StatCollector.translateToLocal("item.macrystal.name.dround").trim();
 	            break;
+			case 8:
+	            s = StatCollector.translateToLocal("item.macrystal.name.void").trim();
+	            break;
 			case 21:
 	            s = StatCollector.translateToLocal("item.macrystal.name.O").trim();
 	            break;
