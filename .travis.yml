@@ -1,3 +1,4 @@
 language: java
 script:
-  - gradle setupDevWorkspace build
+  - chmod +x gradlew
+  - gradle clean setupCIWorkspace build
